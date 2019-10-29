@@ -15,7 +15,7 @@ class subreddit
     {
         return $this->subredditID;
     }
-    public function getGubredditName()
+    public function getSubredditName()
     {
         return $this->subredditName;
     }

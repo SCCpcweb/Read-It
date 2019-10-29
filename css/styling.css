@@ -125,6 +125,20 @@ h4 {
   padding: 10px;
 }
 
+.container-sidebar ul {
+  list-style: none;
+}
+
+.container-sidebar a,
+.container-sidebar a:visited {
+  color: slateblue;
+  transition: 200ms ease-in-out;
+}
+
+.container-sidebar a:hover {
+  border-bottom: 1px solid slateblue;
+}
+
 .container-main {
   flex: 4;
   /* border: 3px solid #eee; */

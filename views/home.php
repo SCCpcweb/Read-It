@@ -7,7 +7,12 @@
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
         <div class="container-sidebar">
-            <p>Sidebar left</p>
+            <h3>Boards</h3>
+            <ul>
+                <?php foreach ($subreddits as $board) {
+                    echo '<li><a href="#"' .  'id=' . $board->getSubredditID() . '>' . $board->getSubredditName() . '</a></li>';
+                } ?>
+            </ul>
         </div>
         <div class="container-main">
             <h2>

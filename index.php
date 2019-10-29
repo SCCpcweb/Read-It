@@ -2,6 +2,7 @@
 
 require_once 'models/userDA.php';
 require_once 'models/database.php';
+require_once 'models/subreddit/subredditDA.php';
 
 session_start();
 
@@ -15,6 +16,8 @@ if ($action === null) {
 
 switch ($action) {
     case 'home':
+        $subreddits = subredditDA::get_all();
+        $_GET['subreddits'] = $subreddits;
         require 'views/home.php';
         die();
         break;
