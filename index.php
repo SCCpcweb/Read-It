@@ -17,7 +17,6 @@ if ($action === null) {
 switch ($action) {
     case 'home':
         $subreddits = subredditDA::get_all();
-        $_GET['subreddits'] = $subreddits;
         require 'views/home.php';
         die();
         break;

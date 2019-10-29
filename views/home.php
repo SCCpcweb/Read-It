@@ -7,11 +7,17 @@
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
         <div class="container-sidebar">
-            <h3>Boards</h3>
-            <ul>
-                <?php foreach ($subreddits as $board) {
-                    echo '<li><a href="#"' .  'id=' . $board->getSubredditID() . '>' . $board->getSubredditName() . '</a></li>';
-                } ?>
+            <h2>Available Boards</h2>
+            <p style="font-style: italic">Maybe you'd like to create one yourself?</p>
+            <a href="">Create a Board</a>
+            <ul class="boards">
+                <?php foreach ($subreddits as $board) : ?>
+                    <li>
+                        <a href="subredditController.php?action=viewSubreddit&amp;id=<?php echo htmlspecialchars($board->getSubredditID()); ?>">
+                            <?php echo htmlspecialchars($board->getSubredditName()); ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
         <div class="container-main">
