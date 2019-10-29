@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css?family=Arimo&display=swap");
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  outline: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+table {
+  border: 1px solid red;
+}
+
+td {
+  border: 1px solid blue;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px 20px;
+  justify-content: space-between;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+}
+
+
+nav a {
+  color: white;
+}
+
+.links {
+  display: flex;
+}
+
+.link {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: slateblue;
+  color: white;
+  transition: 0.3s;
+  border: none;
+  font-size: 16px;
+}
+
+.links-username {
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+.links-username a,
+.links-username a:visited {
+  color: black;
+}
+
+.links-username a:hover {
+  color: rgb(75, 75, 75);
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.username h2 {
+  color: rgb(50, 50, 50);
+}
+
+.link-signup {
+  background-color: white;
+  border: 2px solid slateblue;
+  padding: 8px 10px 8px 10px;
+  color: black;
+}
+
+.link:hover {
+  background-color: dodgerblue;
+}
+
+.link-signup:hover {
+  background-color: white;
+  border: 2px solid dodgerblue;
+}
+
+/* CONTAINER STYLING */
+.container {
+  /* border: 1px solid orange; */
+  display: flex;
+  width: 95%;
+  margin: 0 auto;
+  height: 100vh;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.container-main p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 10px 0;
+}
+
+.container-sidebar {
+  flex: 1;
+  border-radius: 6px;
+  background-color: #eee;
+  padding: 10px;
+}
+
+.container-main {
+  flex: 4;
+  /* border: 3px solid #eee; */
+  margin: 0 10px;
+  border-radius: 8px;
+  color: rgb(50, 50, 50);
+}
+
+.container-main-maincontent {
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 8px;
+  /* border: 1px solid red; */
+}
+
+.container-sidebar-right {
+  /* background-color: #eee; */
+  color: white;
+  background-image: linear-gradient(to bottom right, slateblue, dodgerblue);
+  border-radius: 8px;
+  flex: 1;
+  padding: 10px;
+}
+
+.title-card {
+  /* border-radius: 8px;
+  background-color: white; */
+  border-bottom: 3px solid #eee;
+  margin: 10px;
+  padding: 20px;
+}
+
+.footer {
+  padding: 40px;
+  height: 150px;
+  background-color: slateblue;
+  color: white;
+  font-size: 0.8em;
+}
+
+.logo {
+  margin-right: 5px;
+}
