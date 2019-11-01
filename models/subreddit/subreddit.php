@@ -2,12 +2,13 @@
 
 class subreddit
 {
-    private $subredditID, $subredditName;
+    private $subredditID, $subredditName, $subredditDescription;
 
-    public function __construct($subredditID, $subredditName)
+    public function __construct($subredditID, $subredditName, $subredditDescription)
     {
         $this->subredditID = $subredditID;
         $this->subredditName = $subredditName;
+        $this->subredditDescription = $subredditDescription;
     }
 
     // getters
@@ -19,6 +20,10 @@ class subreddit
     {
         return $this->subredditName;
     }
+    public function getSubredditDescription()
+    {
+        return $this->subredditDescription;
+    }
 
     // setters
     public function setSubredditID($subredditID)
@@ -28,5 +33,9 @@ class subreddit
     public function setSubredditName($subredditName)
     {
         $this->subredditName = $subredditName;
+    }
+    public function setSubredditDescription($subredditDescription)
+    {
+        $this->subredditDescription = $subredditDescription;
     }
 }

@@ -9,7 +9,7 @@
         <div class="container-sidebar">
             <h2>Available Boards</h2>
             <p style="font-style: italic">Maybe you'd like to create one yourself?</p>
-            <a href="">Create a Board</a>
+            <a href="subredditController.php?action=createSubredditForm">Create a Board</a>
             <ul class="boards">
                 <?php foreach ($subreddits as $board) : ?>
                     <li>

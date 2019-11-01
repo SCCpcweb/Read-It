@@ -15,7 +15,26 @@ class subredditDA
         $rows = $statement->fetchAll();
 
         foreach ($rows as $value) {
-            $subreddit = new subreddit($value['subredditID'], $value['subredditName']);
+            $subreddit = new subreddit($value['subredditID'], $value['subredditName'], $value['subredditDescription']);
+            $subreddits[] = $subreddit;
+        }
+
+        $statement->closeCursor();
+        return $subreddits;
+    }
+
+    public static function get_board($id)
+    {
+        $db = Database::getDB();
+
+        $querySubreddits = 'SELECT * FROM subreddits where subredditID = :id';
+        $statement = $db->prepare($querySubreddits);
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $subreddit = new subreddit($value['subredditID'], $value['subredditName'], $value['subredditDescription']);
             $subreddits[] = $subreddit;
         }
 

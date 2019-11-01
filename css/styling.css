@@ -42,6 +42,33 @@ nav a {
   color: white;
 }
 
+input[type=text] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+input[type=submit] {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: slateblue;
+  color: white;
+  transition: 0.3s;
+  border: none;
+  font-size: 16px;
+}
+
+input[type=submit]:hover {
+  background-color: dodgerblue;
+}
+
+textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
 .links {
   display: flex;
 }
@@ -189,4 +216,26 @@ h4 {
 
 .boards {
   margin-top: 15px;
+}
+
+.subredditForm {
+  /* border: 3px solid blue; */
+  margin: 0 auto;
+  width: 50vw;
+}
+
+.formElement {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 10px 0;
+
+  /* border: 1px solid red; */
+}
+
+.formElement label {
+  margin-bottom: 5px;
+}
+
+.appear {
+  display: none;
 }
