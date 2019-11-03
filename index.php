@@ -21,10 +21,16 @@ switch ($action) {
         die();
         break;
     case 'profile':
-        $_SESSION['user'] = userDA::getUser($_SESSION['username']);
-        require 'views/profile.php';
-        die();
-        break;
+        if (empty($_SESSION['user'])) {
+            header('Location: index.php?action=signUp');
+            break;
+            die();
+        } else {
+            $_SESSION['user'] = userDA::getUser($_SESSION['username']);
+            require 'views/profile.php';
+            die();
+            break;
+        }
     case 'signUp':
         require('views/signUpPage.php');
         die();
