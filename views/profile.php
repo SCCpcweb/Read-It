@@ -13,6 +13,11 @@
                 echo '<p>' . "User ID: " . $_SESSION['user']->getUserID() . '</p>';
                 echo '<p>' . "Hashed Password: " . $_SESSION['user']->getPassword() . '</p>';
             } ?>
+            <form action="index.php" method="POST">
+                <input type="submit" value="DELETE PROFILE (WIP)">
+                <input type="hidden" name="action" value="deleteProfile">
+                <input type="hidden" name="profileToDelete" value="<?php $_SESSION["user"]->getUserID(); ?>">
+            </form>
         </div>
     </div>
 

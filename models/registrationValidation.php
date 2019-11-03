@@ -64,6 +64,9 @@ if (preg_match('(.*[a-z].*)', $password) === 0) {
 if (preg_match('(.*\d.*)', $password) === 0) {
     array_push($passwordErrors, "Password must contain at least one number");
 }
+if ($password !== $passwordVerify) {
+    array_push($passwordErrors, "Passwords must match");
+}
 
 if (!empty($passwordErrors) || !empty($registrationErrors)) {
     include('views/signUpPage.php');
@@ -71,9 +74,9 @@ if (!empty($passwordErrors) || !empty($registrationErrors)) {
 }
 
 $options = ['cost' => 11];
-$hashedPassword = password_hash($_POST['password-signup'], PASSWORD_BCRYPT, $options);
+$hashedPassword = password_hash($_POST['password-signUp'], PASSWORD_BCRYPT, $options);
 
 // insert user
 $users = userDA::insert_user('', $username, $email, $hashedPassword);
 $_SESSION['username'] = $username;
-header('location: $_SERVER["DOCUMENT_ROOT"]/index.php?action=profile');
+header('location: /index.php?action=profile');

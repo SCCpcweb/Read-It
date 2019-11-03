@@ -44,13 +44,13 @@
         <form action="index.php" method="POST">
           <h2 class="login-title" style="margin-bottom: 10px;">Sign up</h2>
           <div class="input-section">
-            <label for="username-signUp">Username</label><input type="text" name="username-signup" required>
+            <label for="username-signUp">Username</label><input type="text" name="username-signUp" required>
           </div>
           <div class="input-section">
-            <label for="email-signUp">Email</label><input type="email" name="email" required>
+            <label for="email-signUp">Email</label><input type="email" name="email-signUp" required>
           </div>
           <div class="input-section">
-            <label for="password-signup">Password</label><input type="password" name="password-signup" required>
+            <label for="password-signup">Password</label><input type="password" name="password-signUp" required>
           </div>
           <div class="input-section">
             <label for="password-verify">Verify Password</label><input type="password" name="password-verify" required>

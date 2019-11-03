@@ -43,4 +43,10 @@ switch ($action) {
         header('Location: index.php?action=home');
         die();
         break;
+    case 'deleteProfile':
+        echo 'DELETE THE PROFILE!';
+        // session_destroy();
+        // header('Location: index.php?action=home');
+        die();
+        break;
 }
