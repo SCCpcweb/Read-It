@@ -21,11 +21,17 @@ switch ($action) {
         die();
         break;
     case 'createSubredditForm':
-        require 'views/createSubredditForm.php';
-        die();
-        break;
+        if (empty($_SESSION['username'])) {
+            header('Location: index.php?action=signUp');
+            break;
+            die();
+        } else {
+            require 'views/createSubredditForm.php';
+            die();
+            break;
+        }
     case 'createSubreddit':
-        echo 'yeet';
+        require 'models/subreddit/subredditValidation.php';
         die();
         break;
 }

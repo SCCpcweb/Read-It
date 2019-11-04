@@ -236,6 +236,18 @@ h4 {
   margin-bottom: 5px;
 }
 
+.formElement p {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
 .appear {
   display: none;
+}
+
+.greyCard {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: #eee;
 }

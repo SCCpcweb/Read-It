@@ -17,6 +17,10 @@
                     <label for="boardDescription">Board Description</label>
                     <textarea placeholder="Board Description" name="boardDescription"></textarea>
                 </div>
+                <div class="formElement">
+                    <label>Board Manager</label>
+                    <p class="greyCard"><?php echo $_SESSION['username']; ?></p>
+                </div>
                 <input type="hidden" name="action" value="createSubreddit">
                 <input type="submit" value="Create Board">
             </form>

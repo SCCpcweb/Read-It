@@ -21,7 +21,7 @@ switch ($action) {
         die();
         break;
     case 'profile':
-        if (empty($_SESSION['user'])) {
+        if (empty($_SESSION['username'])) {
             header('Location: index.php?action=signUp');
             break;
             die();
