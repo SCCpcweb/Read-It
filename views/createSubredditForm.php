@@ -10,6 +10,15 @@
             <form action="subredditController.php" method="POST" class="subredditForm">
                 <h1>Board Creation Tool</h1>
                 <div class="formElement">
+                    <?php if (!empty($boardErrors)) {
+                        echo '<div class="error">';
+                        foreach ($boardErrors as $error) {
+                            echo '<p>' . htmlspecialchars($error) . '</p>';
+                        }
+                        echo '</div>';
+                    } ?>
+                </div>
+                <div class="formElement">
                     <label for="boardName">Board Name</label>
                     <input type="text" placeholder="Board Name" name="boardName">
                 </div>
