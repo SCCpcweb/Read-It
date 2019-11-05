@@ -34,4 +34,8 @@ switch ($action) {
         require 'models/subreddit/subredditValidation.php';
         die();
         break;
+    case 'createPost':
+        require 'models/postValidation.php';
+        die();
+        break;
 }
