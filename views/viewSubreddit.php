@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once("views/components/header.php");
-$postErrors = $_SESSION['postErrors'];
-?>
+<?php include_once("views/components/header.php"); ?>
 
 <body>
     <?php include_once("views/components/nav.php"); ?>
@@ -41,7 +39,6 @@ $postErrors = $_SESSION['postErrors'];
             <h1><?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?></h1>
             <p><?php echo htmlspecialchars($subreddit[0]->getSubredditDescription()); ?></p>
             <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit[0]->getSubredditID()); ?></p>
-
 
             <?php if (!empty($_SESSION['username'])) : ?>
                 <button class="link" onClick="toggleClass()" id="toggleButton">Create New Post</button>

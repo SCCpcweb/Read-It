@@ -1,5 +1,7 @@
 <?php
 
+require_once("models/posts/postDA.php");
+
 // user inputs
 $postTitle = filter_input(INPUT_POST, 'postTitle');
 $postContent = filter_input(INPUT_POST, 'postContent');
@@ -27,7 +29,6 @@ if (!empty($postErrors)) {
     $_SESSION['postErrors'] = $postErrors;
     header("Location: subredditController.php?action=viewSubreddit&id=$subredditID");
 } else {
-    echo 'yeet';
-    // subredditDA::insert_subreddit($subredditID, $boardName, $boardDescription);
-    // header("Location: index.php?action=home");
+    postDA::insert_post('', $subredditID, $_SESSION['user']->getUserID(), $postTitle, $postContent, '');
+    header("Location: index.php?action=home");
 }
