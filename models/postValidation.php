@@ -1,5 +1,8 @@
 <?php
 
+require_once 'models/post/postDA.php';
+require_once 'models/user.php';
+
 // user inputs
 $postTitle = filter_input(INPUT_POST, 'postTitle');
 $postContent = filter_input(INPUT_POST, 'postContent');
@@ -24,10 +27,9 @@ if ($postContent === "" || $postContent === null) {
 
 if (!empty($postErrors)) {
     // if there are errors go back to the page
-    $_SESSION['postErrors'] = $postErrors;
-    header("Location: subredditController.php?action=viewSubreddit&id=$subredditID");
+    // include('views/viewSubreddit.php');
+    header("Location: subredditController.php?action=viewSubreddit&id=" . $subredditID);
 } else {
-    echo 'yeet';
-    // subredditDA::insert_subreddit($subredditID, $boardName, $boardDescription);
-    // header("Location: index.php?action=home");
+    postDA::insert_post($subredditID, $_SESSION['user']->getUserID(), $postTitle, $postContent);
+    header("Location: subredditController.php?action=viewSubreddit&id=" . $subredditID);
 }

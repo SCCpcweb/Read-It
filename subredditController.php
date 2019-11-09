@@ -2,6 +2,9 @@
 
 require_once 'models/database.php';
 require_once 'models/subreddit/subredditDA.php';
+require_once 'models/post/postDA.php';
+require_once 'models/post/post.php';
+require_once 'models/user.php';
 
 session_start();
 
@@ -17,6 +20,7 @@ switch ($action) {
     case 'viewSubreddit':
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
+        $posts = postDA::get_posts_for_subreddit($subredditID);
         require 'views/viewSubreddit.php';
         die();
         break;

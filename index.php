@@ -3,6 +3,7 @@
 require_once 'models/userDA.php';
 require_once 'models/database.php';
 require_once 'models/subreddit/subredditDA.php';
+require_once 'models/user.php';
 
 session_start();
 
@@ -26,7 +27,8 @@ switch ($action) {
             break;
             die();
         } else {
-            $_SESSION['user'] = userDA::getUser($_SESSION['username']);
+            $user = userDA::getUser($_SESSION['username']);
+            $_SESSION['user'] = $user;
             require 'views/profile.php';
             die();
             break;

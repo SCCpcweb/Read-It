@@ -43,7 +43,8 @@
             </div>
         </div>
         <div class="container-sidebar-right">
-            <p>Sidebar right</p>
+            <p>Available Users:</p>
+            <p>Work in progress</p>
         </div>
     </div>
 

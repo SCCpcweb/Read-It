@@ -194,6 +194,10 @@ h4 {
   padding: 10px;
 }
 
+.container .link {
+  margin: 0;
+}
+
 .title-card {
   /* border-radius: 8px;
   background-color: white; */
@@ -289,6 +293,38 @@ h4 {
   animation-name: animatetop;
   animation-duration: 0.4s;
   height: 400px;
+}
+
+.post {
+  margin-top: 10px;
+  background-color: #eee;
+  padding: 5px 20px;
+  border-radius: 6px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+.post a {
+  color: slateblue;
+}
+
+.post a:hover,
+.post a:focus {
+  color: purple;
+}
+
+.top-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.board-info {
+  /* border: 1px solid red; */
+  margin-right: 15px;
+  padding: 20px;
+  background-color: #eee;
+  border-radius: 6px;
+  flex: 1;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
 }
 
 /* Add Animation */
