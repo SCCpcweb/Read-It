@@ -19,6 +19,8 @@ if ($action === null) {
 
 switch ($action) {
     case 'viewSubreddit':
+        $users = userDA::get_all();
+        $subreddits = subredditDA::get_all();
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
         $posts = postDA::get_posts_for_subreddit($subredditID);
@@ -40,6 +42,7 @@ switch ($action) {
         die();
         break;
     case 'createPost':
+        echo 'yee';
         require 'models/postValidation.php';
         die();
         break;

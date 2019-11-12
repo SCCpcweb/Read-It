@@ -6,12 +6,12 @@ include_once("views/components/header.php"); ?>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
         <div class="container-main">
-            <div class="posts">
-                <div class="post">
-                    <?php if (!empty($_SESSION['user'])) { ?>
-                        <?php include_once("views/components/voteButton.php"); ?>
-                    <?php } ?>
+            <div class="post">
+                <?php if (!empty($_SESSION['user'])) { ?>
+                    <?php include_once("views/components/voteButton.php"); ?>
+                <?php } ?>
 
+                <div class="post-content">
                     <h2><?php echo htmlspecialchars($post->getPostTitle()) ?></h2>
                     <p><?php echo htmlspecialchars($post->getPostContent()) ?></p>
                     <p><?php echo 'By: ' . htmlspecialchars(userDA::getUserByID($post->getUserID())->getUsername()) ?></p>

@@ -17,6 +17,7 @@ if ($action === null) {
 
 switch ($action) {
     case 'home':
+        $users = userDA::get_all();
         $subreddits = subredditDA::get_all();
         require 'views/home.php';
         die();
@@ -49,6 +50,10 @@ switch ($action) {
     case 'logout':
         session_destroy();
         header('Location: index.php?action=home');
+        die();
+        break;
+    case 'viewUser':
+        include('views/viewUser.php');
         die();
         break;
     case 'deleteProfile':

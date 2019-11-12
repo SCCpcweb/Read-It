@@ -26,13 +26,10 @@
             </h2>
             <div class="container-main-maincontent">
                 <h3>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Go create a post!
                 </h3>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia
-                    cupiditate voluptates earum tenetur consequatur accusamus dicta
-                    repellat rerum unde nemo cum, rem perferendis corporis dolores
-                    deserunt odit accusantium explicabo nihil.
+                    Start by picking a board, making a post, and replying to comments.
                 </p>
                 <p>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia
@@ -42,10 +39,11 @@
                 </p>
             </div>
         </div>
-        <div class="container-sidebar-right">
+        <?php include_once('views\components\usersSidebar.php'); ?>
+        <!-- <div class="container-sidebar-right">
             <p>Available Users:</p>
             <p>Work in progress</p>
-        </div>
+        </div> -->
     </div>
 
     <div class="footer">
