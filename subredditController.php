@@ -5,6 +5,7 @@ require_once 'models/subreddit/subredditDA.php';
 require_once 'models/post/postDA.php';
 require_once 'models/post/post.php';
 require_once 'models/user.php';
+require_once 'models/userDA.php';
 
 session_start();
 
@@ -40,6 +41,22 @@ switch ($action) {
         break;
     case 'createPost':
         require 'models/postValidation.php';
+        die();
+        break;
+    case 'viewPost':
+        $postID = filter_input(INPUT_GET, 'postID');
+        $post = postDA::get_post($postID);
+        include("views/viewPost.php");
+        die();
+        break;
+    case 'editPost':
+        $postID = filter_input(INPUT_POST, 'postID');
+        $post = postDA::get_post($postID);
+        include 'views/posts/editPost.php';
+        die();
+        break;
+    case 'submitEdit':
+        echo 'yeet';
         die();
         break;
 }

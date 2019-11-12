@@ -4,5 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/styling.css" />
     <link rel="icon" href="images/book.png" />
+    <script src="https://kit.fontawesome.com/7d78b719fc.js" crossorigin="anonymous"></script>
     <title>Read-It</title>
 </head>

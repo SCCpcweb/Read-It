@@ -295,10 +295,14 @@ h4 {
   height: 400px;
 }
 
+.posts {
+  margin-bottom: 10px;
+}
+
 .post {
-  margin-top: 10px;
+  margin-top: 15px;
   background-color: #eee;
-  padding: 5px 20px;
+  padding: 5px;
   border-radius: 6px;
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
 }
@@ -318,13 +322,85 @@ h4 {
 }
 
 .board-info {
-  /* border: 1px solid red; */
   margin-right: 15px;
-  padding: 20px;
-  background-color: #eee;
+  /* padding: 20px; */
+  /* background-color: #eee; */
   border-radius: 6px;
   flex: 1;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+  /* box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4); */
+
+  /* border: 1px solid red; */
+}
+
+.fas {
+  color: rgb(50, 50, 50);
+  font-size: 28px;
+  padding: 15px;
+  border-radius: 20%;
+  transition: color 600ms,
+    background-color 300ms,
+    border-radius 600ms;
+  position: relative;
+}
+
+.fas:hover,
+.fas:focus {
+  border-radius: 50%;
+  color: white;
+  background-color: slateblue;
+}
+
+.fas:after {
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.fas:hover:after {
+  position: absolute;
+  bottom: 65;
+  left: -30;
+  text-align: center;
+  padding: 10px 0;
+  width: 120px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 12px;
+  border-radius: 6px;
+  -webkit-animation: fade-in-top 400ms;
+  animation: fade-in-top 400ms;
+}
+
+.like:hover:after {
+  content: 'Thumbs Up';
+}
+
+.dislike:hover:after {
+  content: 'Thumbs Down';
+}
+
+.vote-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 57px;
+  margin-right: 10px;
+  float: left;
+}
+
+.vote-buttons>* {
+  margin-bottom: 5px;
+}
+
+@keyframes fade-in-top {
+  from {
+    opacity: 0;
+    bottom: 90;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 65;
+  }
 }
 
 /* Add Animation */
@@ -365,4 +441,26 @@ h4 {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.comment {
+  background-color: #eee;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 600px) {
+  .top-content {
+    flex-direction: column;
+    /* border: 1px solid red; */
+  }
+
+  .board-info {
+    margin: 0 0 10px 0;
+  }
+
+  .form-creation-tool {
+    margin-bottom: 10px;
+  }
 }

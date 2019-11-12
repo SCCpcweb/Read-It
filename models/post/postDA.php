@@ -49,7 +49,7 @@ class postDA
         $db = Database::getDB();
 
         //$queryUser = 'SELECT * FROM users WHERE username like "SamHookstra"';
-        $queryUser = 'SELECT * FROM users where postID = :postID';
+        $queryUser = 'SELECT * FROM posts where postID = :postID';
         $statement = $db->prepare($queryUser);
         $statement->bindValue(':postID', $postID);
         $statement->execute();

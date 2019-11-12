@@ -83,6 +83,26 @@ class userDA
         return $user;
     }
 
+    // get a user by their ID
+    public static function getUserByID($userID)
+    {
+        $db = Database::getDB();
+
+        //$queryUser = 'SELECT * FROM users WHERE username like "SamHookstra"';
+        $queryUser = 'SELECT * FROM users where userID = :userID';
+        $statement = $db->prepare($queryUser);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $user = new user($value['userID'], $value['username'], $value['email'], $value['password']);
+        }
+
+        $statement->closeCursor();
+        return $user;
+    }
+
     // check if a username exists in the database
     public static function check_username($username)
     {
