@@ -9,17 +9,18 @@ class postDA
     {
         $db = Database::getDB();
 
-        date_default_timezone_set("America/New_York");
+        date_default_timezone_set("America/Chicago");
+        $currentDatetime = date('Y/m/d h:i:s a', time());
 
-        $query = 'INSERT INTO posts(postID, subredditID, userID, postTitle, postContent, postTime)
+        $insertPost = 'INSERT INTO posts(postID, subredditID, userID, postTitle, postContent, postTime)
                 VALUES(:postID, :subredditID, :userID, :postTitle, :postContent, :postTime)';
-        $statement = $db->prepare($query);
+        $statement = $db->prepare($insertPost);
         $statement->bindValue(':postID', '');
         $statement->bindValue(':subredditID', $subredditID);
         $statement->bindValue(':userID', $userID);
         $statement->bindValue(':postTitle', $postTitle);
         $statement->bindValue(':postContent', $postContent);
-        $statement->bindValue(':postTime', 'NOW()');
+        $statement->bindValue(':postTime', $currentDatetime);
         $statement->execute();
         $statement->closeCursor();
     }
@@ -29,8 +30,8 @@ class postDA
         $db = Database::getDB();
 
         //$queryUser = 'SELECT * FROM users WHERE username like "SamHookstra"';
-        $queryUser = 'SELECT * FROM posts where subredditID = :subredditID';
-        $statement = $db->prepare($queryUser);
+        $queryPosts = 'SELECT * FROM posts where subredditID = :subredditID';
+        $statement = $db->prepare($queryPosts);
         $statement->bindValue(':subredditID', $subredditID);
         $statement->execute();
         $rows = $statement->fetchAll();
@@ -50,8 +51,8 @@ class postDA
         $db = Database::getDB();
 
         //$queryUser = 'SELECT * FROM users WHERE username like "SamHookstra"';
-        $queryUser = 'SELECT * FROM posts where postID = :postID';
-        $statement = $db->prepare($queryUser);
+        $queryPost = 'SELECT * FROM posts where postID = :postID';
+        $statement = $db->prepare($queryPost);
         $statement->bindValue(':postID', $postID);
         $statement->execute();
         $rows = $statement->fetchAll();
@@ -62,5 +63,13 @@ class postDA
 
         $statement->closeCursor();
         return $post;
+    }
+
+    public static function update_post($postID)
+    {
+        $db = Database::getDB();
+
+        //
+        $updatePost = '';
     }
 }

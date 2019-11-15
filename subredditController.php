@@ -7,6 +7,8 @@ require_once 'models/post/post.php';
 require_once 'models/user.php';
 require_once 'models/userDA.php';
 
+date_default_timezone_set('America/Chicago');
+
 session_start();
 
 $action = filter_input(INPUT_POST, 'action');
@@ -42,8 +44,9 @@ switch ($action) {
         die();
         break;
     case 'createPost':
-        echo 'yee';
-        require 'models/postValidation.php';
+        $subredditID = filter_input(INPUT_POST, 'subredditID');
+        $subredditName = filter_input(INPUT_POST, 'subredditName');
+        include('views/createPost.php');
         die();
         break;
     case 'viewPost':
@@ -60,6 +63,11 @@ switch ($action) {
         break;
     case 'submitEdit':
         echo 'yeet';
+        die();
+        break;
+    case 'postValidation':
+        require('models/postValidation.php');
+        echo 'POST VALIDATION';
         die();
         break;
 }

@@ -27,7 +27,9 @@
                     <p><?php echo htmlspecialchars($subreddit[0]->getSubredditDescription()); ?></p>
                     <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit[0]->getSubredditID()); ?></p>
                     <form action="subredditController.php" method="POST">
-                        <input type="hidden" name="action" action="createPost">
+                        <input type="hidden" name="action" value="createPost">
+                        <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?>">
+                        <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditID()); ?>">
                         <input type="submit" value="Create Your Own Post">
                     </form>
                 </div>

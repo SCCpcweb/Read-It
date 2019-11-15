@@ -66,6 +66,7 @@ textarea {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  margin: 5px 0;
 }
 
 .links {
@@ -313,8 +314,13 @@ h4 {
   background-color: #eee;
   padding: 15px 5px;
   border-radius: 6px;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
   display: flex;
+  transition: box-shadow 350ms;
+}
+
+.post:hover {
+  box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.3);
 }
 
 .post a {
@@ -416,7 +422,7 @@ h3 {
   justify-content: center;
 }
 
-.vote-buttons > * {
+.vote-buttons>* {
   margin-bottom: 5px;
 }
 

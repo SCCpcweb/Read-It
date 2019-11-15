@@ -25,6 +25,7 @@ include_once("views/components/header.php"); ?>
                                 <input type="submit" value="Edit Post">
                             </form>
                         <?php } ?>
+                        <input type="submit" value="Add Comment" style="margin-top: 5px">
                     <?php } ?>
                 </div>
             </div>

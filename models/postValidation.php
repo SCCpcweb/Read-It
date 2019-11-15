@@ -27,9 +27,13 @@ if ($postContent === "" || $postContent === null) {
 
 if (!empty($postErrors)) {
     // if there are errors go back to the page
-    // include('views/viewSubreddit.php');
-    header("Location: subredditController.php?action=viewSubreddit&id=" . $subredditID);
+    $_POST['action'] = 'createPost';
+    // . $subredditID
+    // require('subredditController.php');
+    return;
+    // header("Location: subredditController.php");
 } else {
+    $currentDatetime = date('m/d/Y h:i:s a', time());
     postDA::insert_post($subredditID, $_SESSION['user']->getUserID(), $postTitle, $postContent);
     header("Location: subredditController.php?action=viewSubreddit&id=" . $subredditID);
 }

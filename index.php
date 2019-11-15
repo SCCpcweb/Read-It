@@ -5,6 +5,8 @@ require_once 'models/database.php';
 require_once 'models/subreddit/subredditDA.php';
 require_once 'models/user.php';
 
+date_default_timezone_set('America/Chicago');
+
 session_start();
 
 $action = filter_input(INPUT_POST, 'action');
