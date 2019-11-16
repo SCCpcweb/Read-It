@@ -15,23 +15,22 @@ $postContent = trim($postContent);
 $postErrors = [];
 
 if ($postTitle === "" || $postTitle === null) {
-    array_push($postErrors, "Must enter a board name");
+    array_push($postErrors, "Must enter a title");
 } else if (strlen($postTitle) > 64) {
-    array_push($postErrors, "Board name must be less than 64 characters");
+    array_push($postErrors, "Post title must be less than 64 characters");
 }
 if ($postContent === "" || $postContent === null) {
     array_push($postErrors, "Must enter a board description");
 } else if (strlen($postContent) > 1500) {
-    array_push($postErrors, "Board description must be less than 1500 characters");
+    array_push($postErrors, "Post content must be less than 1500 characters");
 }
 
 if (!empty($postErrors)) {
     // if there are errors go back to the page
     $_POST['action'] = 'createPost';
-    // . $subredditID
-    // require('subredditController.php');
-    return;
-    // header("Location: subredditController.php");
+    $_POST['subredditID'] = $subredditID;
+    $_POST['subredditName'] = subredditDA::get_board($subredditID)[0]->getSubredditName();
+    include('views/createPost.php');
 } else {
     $currentDatetime = date('m/d/Y h:i:s a', time());
     postDA::insert_post($subredditID, $_SESSION['user']->getUserID(), $postTitle, $postContent);

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once("views/components/header.php"); ?>
+<?php include_once("views/components/header.php");
+if (empty($subredditName)) {
+    $subredditName = $_POST['subredditName'];
+}
+?>
 
 <body>
     <?php include_once("views/components/nav.php"); ?>
@@ -24,15 +28,12 @@
                 <input type="hidden" name="action" value="createPost">
                 <input type="hidden" name="subredditID" value="<?php echo $subredditID; ?>">
                 <?php if (!empty($postErrors)) { ?>
-                    <div class="error" style="margin-bottom: 20px" id="errors">
+                    <div class="error" style="margin-bottom: 10px" id="errors">
                         <?php foreach ($postErrors as $error) { ?>
                             <p><?php echo htmlspecialchars($error); ?></p>
                         <?php } ?>
                     </div>
                 <?php } ?>
-                <div class="error" style="margin-bottom: 10px">
-                    ERRORS GO HERE
-                </div>
                 <input type="hidden" value="postValidation" name="action">
                 <input type="submit" value="Create Post" id="createPost">
             </form>

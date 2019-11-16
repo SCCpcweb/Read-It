@@ -26,6 +26,7 @@
                     <h1><?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?></h1>
                     <p><?php echo htmlspecialchars($subreddit[0]->getSubredditDescription()); ?></p>
                     <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit[0]->getSubredditID()); ?></p>
+                    <p>Board admins: WIP</p>
                     <form action="subredditController.php" method="POST">
                         <input type="hidden" name="action" value="createPost">
                         <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?>">

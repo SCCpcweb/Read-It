@@ -346,6 +346,35 @@ h3 {
   margin-bottom: 5px;
 }
 
+.post-links {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width: 500px;
+
+  /* border: 2px solid red; */
+}
+
+.post-links input[type=submit] {
+  background-color: transparent;
+  color: slateblue;
+  padding: 0px;
+  border-radius: 0;
+  border: none;
+  margin-right: 15px;
+
+  /* border: 1px solid orange; */
+}
+
+.post-links input[type=submit]:hover {
+  color: dodgerblue;
+  cursor: pointer;
+  /* border: 1px solid orange; */
+}
+
+
+
 .top-content {
   display: flex;
   flex-direction: row;

@@ -67,7 +67,6 @@ switch ($action) {
         break;
     case 'postValidation':
         require('models/postValidation.php');
-        echo 'POST VALIDATION';
         die();
         break;
 }
