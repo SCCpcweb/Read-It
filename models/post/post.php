@@ -2,9 +2,9 @@
 
 class post
 {
-    private $postID, $subredditID, $userID, $postTitle, $postContent, $postTime;
+    private $postID, $subredditID, $userID, $postTitle, $postContent, $postTime, $rating;
 
-    public function __construct($postID, $subredditID, $userID, $postTitle, $postContent, $postTime)
+    public function __construct($postID, $subredditID, $userID, $postTitle, $postContent, $postTime, $rating)
     {
         $this->postID = $postID;
         $this->subredditID = $subredditID;
@@ -12,6 +12,7 @@ class post
         $this->postTitle = $postTitle;
         $this->postContent = $postContent;
         $this->postTime = $postTime;
+        $this->rating = $rating;
     }
 
     // getters
@@ -39,6 +40,10 @@ class post
     {
         return $this->postTime;
     }
+    public function getRating()
+    {
+        return $this->rating;
+    }
 
     // setters
     public function setPostID($postID)
@@ -64,5 +69,9 @@ class post
     public function setPostTime($postTime)
     {
         $this->postTime = $postTime;
+    }
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
     }
 }

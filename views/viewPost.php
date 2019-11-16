@@ -16,6 +16,7 @@ include_once("views/components/header.php"); ?>
                     <p><?php echo htmlspecialchars($post->getPostContent()) ?></p>
                     <p><?php echo 'By: ' . htmlspecialchars(userDA::getUserByID($post->getUserID())->getUsername()) ?></p>
                     <p><?php echo 'On: ' . htmlspecialchars($post->getPostTime()) ?></p>
+                    <p><?php echo 'Rating: ' . htmlspecialchars($post->getRating()) ?></p>
 
                     <div class="post-links">
                         <?php if (!empty($_SESSION['user'])) {
@@ -25,14 +26,13 @@ include_once("views/components/header.php"); ?>
                                     <input type="hidden" name="action" value="editPost">
                                     <input type="submit" value="Edit Post">
                                 </form>
-                                <input type="submit" value="Add Comment (WIP)">
                                 <form action="subredditController.php" method="POST">
                                     <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                                     <input type="hidden" name="action" value="deletePost">
                                     <input type="submit" value="Delete (WIP)">
                                 </form>
                             <?php } ?>
-
+                            <input type="submit" value="Add Comment (WIP)">
                         <?php } ?>
                     </div>
                 </div>

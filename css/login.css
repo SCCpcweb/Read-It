@@ -114,11 +114,18 @@ body {
 }
 
 .image {
-	height: 150px;
-	width: 150px;
-	border-radius: 50%;
-	background-color: #eee;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* border-radius: 50%; */
+	/* background-color: #eee; */
 	margin: 20px auto;
+}
+
+.fa-user {
+	color: rgb(75, 75, 75);
+	font-size: 7em;
+
 }
 
 input[type=text],

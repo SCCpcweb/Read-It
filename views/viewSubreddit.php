@@ -27,12 +27,14 @@
                     <p><?php echo htmlspecialchars($subreddit[0]->getSubredditDescription()); ?></p>
                     <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit[0]->getSubredditID()); ?></p>
                     <p>Board admins: WIP</p>
-                    <form action="subredditController.php" method="POST">
-                        <input type="hidden" name="action" value="createPost">
-                        <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?>">
-                        <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditID()); ?>">
-                        <input type="submit" value="Create Your Own Post">
-                    </form>
+                    <?php if (!empty($_SESSION['user'])) { ?>
+                        <form action="subredditController.php" method="POST">
+                            <input type="hidden" name="action" value="createPost">
+                            <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?>">
+                            <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditID()); ?>">
+                            <input type="submit" value="Create Your Own Post">
+                        </form>
+                    <?php } ?>
                 </div>
 
                 <!-- <?php if (!empty($_SESSION['user'])) { ?>
@@ -83,6 +85,7 @@
                                 <p><?php echo htmlspecialchars($post->getPostContent()) ?></p>
                                 <p><?php echo 'By: ' . htmlspecialchars(userDA::getUserByID($post->getUserID())->getUsername()) ?></p>
                                 <p><?php echo 'On: ' . htmlspecialchars($post->getPostTime()) ?></p>
+                                <p><?php echo 'Rating: ' . htmlspecialchars($post->getRating()); ?></p>
                             </div>
                         </div>
                 <?php }

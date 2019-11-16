@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="css/login.css" />
-
+  <script src="https://kit.fontawesome.com/7d78b719fc.js" crossorigin="anonymous"></script>
   <title>Read-It</title>
 </head>
 
@@ -16,7 +16,9 @@
       <div class="signup-card-left">
         <form action="index.php" method="POST">
           <h2 class="login-title">Log In</h2>
-          <div class="image"></div>
+          <div class="image">
+            <i class="fas fa-user"></i>
+          </div>
           <div class="input-section">
             <label for="username">Username</label><input type="text" name="username" value="<?php if (!empty($username)) {
                                                                                               echo htmlspecialchars($username);
