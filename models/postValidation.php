@@ -32,7 +32,6 @@ if (!empty($postErrors)) {
     $_POST['subredditName'] = subredditDA::get_board($subredditID)[0]->getSubredditName();
     include('views/createPost.php');
 } else {
-    $currentDatetime = date('m/d/Y h:i:s a', time());
     postDA::insert_post($subredditID, $_SESSION['user']->getUserID(), $postTitle, $postContent);
     header("Location: subredditController.php?action=viewSubreddit&id=" . $subredditID);
 }

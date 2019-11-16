@@ -65,11 +65,27 @@ class postDA
         return $post;
     }
 
-    public static function update_post($postID)
+    public static function update_post($postID, $postContent)
     {
         $db = Database::getDB();
 
-        //
-        $updatePost = '';
+        $updatePost = 'UPDATE posts SET postContent = :postContent, postTime = NOW() WHERE postID LIKE :postID';
+        $statement = $db->prepare($updatePost);
+        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':postContent', $postContent);
+        // $statement->bindValue(':postTime', $currentDatetime);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public static function delete_post($postID)
+    {
+        $db = Database::getDB();
+
+        $deletePost = 'DELETE FROM posts WHERE postID LIKE :postID';
+        $statement = $db->prepare($deletePost);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+        $statement->closeCursor();
     }
 }

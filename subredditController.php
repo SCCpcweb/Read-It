@@ -62,11 +62,15 @@ switch ($action) {
         die();
         break;
     case 'submitEdit':
-        echo 'yeet';
+        require('models/posts/editPostValidation.php');
         die();
         break;
     case 'postValidation':
         require('models/postValidation.php');
+        die();
+        break;
+    case 'deletePost':
+        require('');
         die();
         break;
 }
