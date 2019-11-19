@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2019 at 03:15 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Generation Time: Nov 19, 2019 at 09:23 PM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,10 +33,20 @@ USE `read-it`;
 CREATE TABLE `comments` (
   `commentID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
+  `postID` int(11) NOT NULL,
   `subredditID` int(11) NOT NULL,
   `commentContent` varchar(500) NOT NULL,
-  `commentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `commentTime` timestamp NOT NULL DEFAULT current_timestamp(),
+  `rating` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`commentID`, `userID`, `postID`, `subredditID`, `commentContent`, `commentTime`, `rating`) VALUES
+(1, 29, 21, 1, 'd', '2019-11-19 07:32:22', 5),
+(2, 29, 21, 1, 'comment 2', '2019-11-19 07:48:32', 0);
 
 -- --------------------------------------------------------
 
@@ -50,8 +60,8 @@ CREATE TABLE `posts` (
   `userID` int(11) NOT NULL,
   `postTitle` varchar(64) NOT NULL,
   `postContent` varchar(1500) NOT NULL,
-  `postTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `rating` int(11) NOT NULL DEFAULT '0'
+  `postTime` datetime NOT NULL DEFAULT current_timestamp(),
+  `rating` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -133,7 +143,8 @@ INSERT INTO `users` (`userID`, `username`, `email`, `password`) VALUES
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`commentID`),
   ADD KEY `fk_comments_userID` (`userID`),
-  ADD KEY `fk_comments_subredditID` (`subredditID`);
+  ADD KEY `fk_comments_subredditID` (`subredditID`),
+  ADD KEY `fk_comments_postID` (`postID`);
 
 --
 -- Indexes for table `posts`
@@ -170,7 +181,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -198,6 +209,7 @@ ALTER TABLE `users`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_comments_postID` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_comments_subredditID` FOREIGN KEY (`subredditID`) REFERENCES `subreddits` (`subredditID`),
   ADD CONSTRAINT `fk_comments_userID` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
