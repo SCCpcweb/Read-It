@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2019 at 01:11 AM
+-- Generation Time: Nov 19, 2019 at 03:15 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -27,6 +27,20 @@ USE `read-it`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `commentID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `subredditID` int(11) NOT NULL,
+  `commentContent` varchar(500) NOT NULL,
+  `commentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -36,8 +50,23 @@ CREATE TABLE `posts` (
   `userID` int(11) NOT NULL,
   `postTitle` varchar(64) NOT NULL,
   `postContent` varchar(1500) NOT NULL,
-  `postTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `postTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `rating` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`postID`, `subredditID`, `userID`, `postTitle`, `postContent`, `postTime`, `rating`) VALUES
+(21, 1, 36, 'time', 'hack', '0000-00-00 00:00:00', 0),
+(22, 1, 36, 'alert(\'yee\');', 'alert(\'yee\');', '2019-11-16 12:02:54', 0),
+(23, 1, 36, '--', 'yeeby', '2019-11-16 12:07:37', 0),
+(24, 1, 29, 'another test post', 'yeet', '2019-11-16 15:38:30', 0),
+(25, 1, 29, 'test', 'sadasdfg', '2019-11-16 16:29:58', 0),
+(26, 3, 29, 'post', 'yee', '2019-11-16 16:19:00', 0),
+(27, 3, 29, 'dddddddddd', 'd', '2019-11-16 04:07:49', 0),
+(28, 3, 29, 'Science psot', 's', '2019-11-16 04:11:06', 0);
 
 -- --------------------------------------------------------
 
@@ -70,7 +99,8 @@ INSERT INTO `subreddits` (`subredditID`, `subredditName`, `subredditDescription`
 (1, 'home', 'This is the home board'),
 (3, 'science', 'All things science. Come to this board to discuss the latest breakthroughs in science.'),
 (4, 'Announcements', 'Here is where you\'ll find all announcements related to read-it. Could also answer FAQs, unveil new features, or announce upcoming changes.'),
-(5, 'asdf', 'asdf');
+(5, 'asdf', 'asdf'),
+(6, 'alert(\'post\');', 'gotcha');
 
 -- --------------------------------------------------------
 
@@ -98,12 +128,20 @@ INSERT INTO `users` (`userID`, `username`, `email`, `password`) VALUES
 --
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`commentID`),
+  ADD KEY `fk_comments_userID` (`userID`),
+  ADD KEY `fk_comments_subredditID` (`subredditID`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`postID`),
-  ADD UNIQUE KEY `userID` (`userID`),
-  ADD KEY `subredditID` (`subredditID`);
+  ADD KEY `subredditID` (`subredditID`),
+  ADD KEY `userID` (`userID`) USING BTREE;
 
 --
 -- Indexes for table `subredditadmins`
@@ -129,16 +167,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `subreddits`
 --
 ALTER TABLE `subreddits`
-  MODIFY `subredditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `subredditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -151,11 +195,11 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `posts`
+-- Constraints for table `comments`
 --
-ALTER TABLE `posts`
-  ADD CONSTRAINT `fk_posts_subredditID` FOREIGN KEY (`subredditID`) REFERENCES `subreddits` (`subredditID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_posts_userID` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_comments_subredditID` FOREIGN KEY (`subredditID`) REFERENCES `subreddits` (`subredditID`),
+  ADD CONSTRAINT `fk_comments_userID` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `subredditadmins`
