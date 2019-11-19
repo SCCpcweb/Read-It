@@ -50,7 +50,6 @@ class postDA
     {
         $db = Database::getDB();
 
-        //$queryUser = 'SELECT * FROM users WHERE username like "SamHookstra"';
         $queryPost = 'SELECT * FROM posts where postID = :postID';
         $statement = $db->prepare($queryPost);
         $statement->bindValue(':postID', $postID);

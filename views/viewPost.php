@@ -1,6 +1,7 @@
 <?php
 
-include_once("views/components/header.php"); ?>
+include_once("views/components/header.php");
+include_once("models/comment/Comment.php"); ?>
 
 <body>
     <?php include_once("views/components/nav.php"); ?>
@@ -41,9 +42,27 @@ include_once("views/components/header.php"); ?>
                     </div>
                 </div>
             </div>
+            <!-- <?php var_dump($comments); ?> -->
             <h3>Comments: </h3>
-            <div class="comment">
-                This is what a comment will look like
-            </div>
+            <?php foreach ($comments as $comment) : ?>
+                <div class="comment">
+                    <?php //echo '<p>' . htmlspecialchars($comment->getCommentID()) . '</p>'; 
+                        ?>
+                    <?php //echo '<p>' . htmlspecialchars($comment->getPostID()) . '</p>'; 
+                        ?>
+                    <?php //echo '<p>' . htmlspecialchars($comment->getSubredditID()) . '</p>'; 
+                        ?>
+                    <div class="comment-title">
+                        <p><?php echo htmlspecialchars(userDA::getUserByID($comment->getUserID())->getUsername()); ?></p>
+                        <p><?php echo 'On: ' . htmlspecialchars($comment->getCommentTime()); ?></p>
+                    </div>
+                    <div class="comment-content">
+                        <?php echo '<p>' . htmlspecialchars($comment->getCommentContent()) . '</p>'; ?>
+                        <?php echo '<p>Rating: ' . htmlspecialchars($comment->getRating()) . '</p>'; ?>
+                    </div>
+                </div>
+
+            <?php endforeach ?>
+
         </div>
 </body>

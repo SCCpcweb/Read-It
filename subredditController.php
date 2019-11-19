@@ -6,6 +6,8 @@ require_once 'models/post/postDA.php';
 require_once 'models/post/post.php';
 require_once 'models/user.php';
 require_once 'models/userDA.php';
+require_once 'models/comment/commentDA.php';
+require_once 'models/comment/comment.php';
 
 date_default_timezone_set('America/Chicago');
 
@@ -52,6 +54,7 @@ switch ($action) {
     case 'viewPost':
         $postID = filter_input(INPUT_GET, 'postID');
         $post = postDA::get_post($postID);
+        $comments = commentDA::get_comments_by_subredditID($post->getSubredditID());
         include("views/viewPost.php");
         die();
         break;

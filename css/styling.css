@@ -356,7 +356,7 @@ h3 {
   /* border: 2px solid red; */
 }
 
-.post-links input[type=submit] {
+.post-links input[type="submit"] {
   background-color: transparent;
   color: slateblue;
   padding: 0px;
@@ -367,13 +367,11 @@ h3 {
   /* border: 1px solid orange; */
 }
 
-.post-links input[type=submit]:hover {
+.post-links input[type="submit"]:hover {
   color: dodgerblue;
   cursor: pointer;
   /* border: 1px solid orange; */
 }
-
-
 
 .top-content {
   display: flex;
@@ -451,7 +449,7 @@ h3 {
   justify-content: center;
 }
 
-.vote-buttons>* {
+.vote-buttons > * {
   margin-bottom: 5px;
 }
 
@@ -510,8 +508,22 @@ h3 {
 .comment {
   background-color: #eee;
   border-radius: 6px;
-  padding: 10px;
+  /* padding: 10px; */
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+}
+
+.comment-title {
+  background-color: rgb(221, 221, 221);
+  border-radius: 6px 6px 0 0;
+  padding: 0 10px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-content {
+  padding: 0 0 5px 10px;
 }
 
 @media only screen and (max-width: 600px) {

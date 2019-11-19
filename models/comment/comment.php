@@ -2,15 +2,17 @@
 
 class Comment
 {
-    private $commentID, $userID, $subredditID, $commentContent, $commentTime;
+    private $commentID, $userID, $postID, $subredditID, $commentContent, $commentTime, $rating;
 
-    public function __construct($commentID, $userID, $subredditID, $commentContent, $commentTime)
+    public function __construct($commentID, $userID, $postID, $subredditID, $commentContent, $commentTime, $rating)
     {
-        $this->$commentID = $commentID;
-        $this->$userID = $userID;
-        $this->$subredditID = $subredditID;
-        $this->$commentContent = $commentContent;
-        $this->$commentTime = $commentTime;
+        $this->commentID = $commentID;
+        $this->userID = $userID;
+        $this->postID = $postID;
+        $this->subredditID = $subredditID;
+        $this->commentContent = $commentContent;
+        $this->commentTime = $commentTime;
+        $this->rating = $rating;
     }
 
     // getters 
@@ -18,9 +20,13 @@ class Comment
     {
         return $this->commentID;
     }
-    public function getuserID()
+    public function getUserID()
     {
         return $this->userID;
+    }
+    public function getPostID()
+    {
+        return $this->postID;
     }
     public function getSubredditID()
     {
@@ -34,6 +40,10 @@ class Comment
     {
         return $this->commentTime;
     }
+    public function getRating()
+    {
+        return $this->rating;
+    }
 
     // setters
     public function setCommentID($commentID)
@@ -44,6 +54,10 @@ class Comment
     {
         $this->userID = $userID;
     }
+    public function setPostID($postID)
+    {
+        $this->postID = $postID;
+    }
     public function setSubredditID($subredditID)
     {
         $this->subredditID = $subredditID;
@@ -52,8 +66,12 @@ class Comment
     {
         $this->commentContent = $commentContent;
     }
-    public function set($commentTime)
+    public function setCommentTime($commentTime)
     {
         $this->commentTime = $commentTime;
+    }
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
     }
 }

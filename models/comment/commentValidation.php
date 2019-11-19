@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/comment/commentDA.php';
+require_once 'models/post/postDA.php';
 require_once 'models/comment/comment.php';
 
 // user input
@@ -21,7 +22,8 @@ if ($comment === '' || $comment === null) {
 // if there are errors go back to the page and display errors
 // otherwise add comment to the DB
 if (empty($commentErrors)) {
-    commentDA::insert_comment();
+    // $userID, $postID, $subredditID, $commentContent
+    commentDA::insert_comment($_SESSION['user']->getUserID(), $_POST['postID'], postDA::get_post($_POST['postID'])->getSubredditID(), $comment);
     header("Location: subredditController.php?action=viewPost&postID=" . $_POST['postID']);
 } else {
     $post = postDA::get_post($_POST['postID']);
