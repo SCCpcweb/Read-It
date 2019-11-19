@@ -69,6 +69,16 @@ switch ($action) {
         require('models/postValidation.php');
         die();
         break;
+    case 'commentValidation':
+        require('models/comment/commentValidation.php');
+        die();
+        break;
+    case 'commentForm':
+        $postID = filter_input(INPUT_POST, 'postID');
+        $post = postDA::get_post($postID);
+        include('views/comments/createCommentForm.php');
+        die();
+        break;
     case 'deletePost':
         require('');
         die();

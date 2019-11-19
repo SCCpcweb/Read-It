@@ -32,7 +32,11 @@ include_once("views/components/header.php"); ?>
                                     <input type="submit" value="Delete (WIP)">
                                 </form>
                             <?php } ?>
-                            <input type="submit" value="Add Comment (WIP)">
+                            <form action="subredditController.php" method="POST">
+                                <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
+                                <input type="hidden" name="action" value="commentForm">
+                                <input type="submit" value="Add Comment (WIP)">
+                            </form>
                         <?php } ?>
                     </div>
                 </div>
