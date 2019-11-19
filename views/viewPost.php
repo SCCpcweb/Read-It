@@ -7,7 +7,7 @@ include_once("models/comment/Comment.php"); ?>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
         <div class="container-main">
-            <div class="post">
+            <div class="post" style="margin-bottom: 30px">
                 <?php if (!empty($_SESSION['user'])) { ?>
                     <?php include_once("views/components/voteButton.php"); ?>
                 <?php } ?>
@@ -30,20 +30,20 @@ include_once("models/comment/Comment.php"); ?>
                                 <form action="subredditController.php" method="POST">
                                     <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                                     <input type="hidden" name="action" value="deletePost">
-                                    <input type="submit" value="Delete (WIP)">
+                                    <input type="submit" value="Delete">
                                 </form>
                             <?php } ?>
                             <form action="subredditController.php" method="POST">
                                 <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                                 <input type="hidden" name="action" value="commentForm">
-                                <input type="submit" value="Add Comment (WIP)">
+                                <input type="submit" value="Add Comment">
                             </form>
                         <?php } ?>
                     </div>
                 </div>
             </div>
             <!-- <?php var_dump($comments); ?> -->
-            <h3>Comments: </h3>
+            <h3 style="margin-bottom: 10px">Comments: </h3>
             <?php foreach ($comments as $comment) : ?>
                 <div class="comment">
                     <?php //echo '<p>' . htmlspecialchars($comment->getCommentID()) . '</p>'; 
@@ -57,8 +57,8 @@ include_once("models/comment/Comment.php"); ?>
                         <p><?php echo 'On: ' . htmlspecialchars($comment->getCommentTime()); ?></p>
                     </div>
                     <div class="comment-content">
-                        <?php echo '<p>' . htmlspecialchars($comment->getCommentContent()) . '</p>'; ?>
-                        <?php echo '<p>Rating: ' . htmlspecialchars($comment->getRating()) . '</p>'; ?>
+                        <p><?php echo htmlspecialchars($comment->getCommentContent()); ?></p>
+                        <p>Rating: <?php echo htmlspecialchars($comment->getRating()); ?></p>
                     </div>
                 </div>
 

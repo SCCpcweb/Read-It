@@ -22,11 +22,11 @@
         </div>
         <div class="container-main">
             <h2>
-                <div class="title-card">/r/Main</div>
+                <div class="title-card">Home Page</div>
             </h2>
             <div class="container-main-maincontent">
                 <h3>
-                    Go create a post!
+                    Go Create a Post!
                 </h3>
                 <p>
                     Start by picking a board, making a post, and replying to comments.

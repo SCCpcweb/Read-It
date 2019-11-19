@@ -26,13 +26,13 @@ class CommentDA
         $statement->closeCursor();
     }
 
-    public static function get_comments_by_subredditID($subredditID)
+    public static function get_comments_by_postID($postID)
     {
         $db = Database::getDB();
 
-        $query = 'SELECT * FROM comments WHERE subredditID LIKE :subredditID';
+        $query = 'SELECT * FROM comments WHERE postID LIKE :postID';
         $statement = $db->prepare($query);
-        $statement->bindValue(':subredditID', $subredditID);
+        $statement->bindValue(':postID', $postID);
         $statement->execute();
         $rows = $statement->fetchAll();
         $comments = [];

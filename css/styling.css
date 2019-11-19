@@ -314,13 +314,13 @@ h4 {
   background-color: #eee;
   padding: 15px;
   border-radius: 6px;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.3);
   display: flex;
   transition: box-shadow 350ms;
 }
 
 .post:hover {
-  box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.3);
 }
 
 .post a {
@@ -449,7 +449,7 @@ h3 {
   justify-content: center;
 }
 
-.vote-buttons > * {
+.vote-buttons>* {
   margin-bottom: 5px;
 }
 
@@ -509,7 +509,7 @@ h3 {
   background-color: #eee;
   border-radius: 6px;
   /* padding: 10px; */
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.4);
   margin-bottom: 10px;
 }
 

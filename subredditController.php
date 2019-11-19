@@ -54,7 +54,7 @@ switch ($action) {
     case 'viewPost':
         $postID = filter_input(INPUT_GET, 'postID');
         $post = postDA::get_post($postID);
-        $comments = commentDA::get_comments_by_subredditID($post->getSubredditID());
+        $comments = commentDA::get_comments_by_postID($post->getPostID());
         include("views/viewPost.php");
         die();
         break;
@@ -83,7 +83,11 @@ switch ($action) {
         die();
         break;
     case 'deletePost':
-        require('');
+        // deletes the post and uses the posts subreddit id to redirect the user back
+        // to that board
+        $post = postDA::get_post($_POST['postID']);
+        postDA::delete_post($_POST['postID'], $_SESSION['user']->getUserID());
+        header("Location: subredditController.php?action=viewSubreddit&id=" . $post->getSubredditID());
         die();
         break;
 }

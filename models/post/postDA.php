@@ -77,13 +77,14 @@ class postDA
         $statement->closeCursor();
     }
 
-    public static function delete_post($postID)
+    public static function delete_post($postID, $userID)
     {
         $db = Database::getDB();
 
-        $deletePost = 'DELETE FROM posts WHERE postID LIKE :postID';
+        $deletePost = 'DELETE FROM posts WHERE postID LIKE :postID AND userID LIKE :userID';
         $statement = $db->prepare($deletePost);
         $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':userID', $userID);
         $statement->execute();
         $statement->closeCursor();
     }
