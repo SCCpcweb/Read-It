@@ -40,4 +40,23 @@ class postDA
         $statement->closeCursor();
         return $posts;
     }
+
+    public static function get_post_by_userID($userID)
+    {
+        $db = Database::getDB();
+
+        $queryPosts = 'SELECT * FROM posts WHERE userID = :userID';
+        $statement = $db->prepare($queryPosts);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $post = new post($value['postID'], $value['subredditID'], $value['userID'], $value['postTitle'], $value['postContent'], $value['postTime'], $value['rating']);
+            $posts[] = $post;
+        }
+
+        $statement->closeCursor();
+        return $posts;
+    }
 }

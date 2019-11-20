@@ -3,6 +3,7 @@
 require_once 'models/userDA.php';
 require_once 'models/database.php';
 require_once 'models/subreddit/subredditDA.php';
+require_once 'models/posts/postDA.php';
 require_once 'models/user.php';
 
 date_default_timezone_set('America/Chicago');
@@ -55,6 +56,8 @@ switch ($action) {
         die();
         break;
     case 'viewUser':
+        $user = userDA::getUserByID($_GET['userID']);
+        $posts = postDA::get_post_by_userID($user->getUserID());
         include('views/viewUser.php');
         die();
         break;
