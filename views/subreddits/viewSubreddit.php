@@ -23,9 +23,9 @@
         <div class="container-main">
             <div class="top-content">
                 <div class="board-info">
-                    <h1><?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?></h1>
-                    <p><?php echo htmlspecialchars($subreddit[0]->getSubredditDescription()); ?></p>
-                    <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit[0]->getSubredditID()); ?></p>
+                    <h1><?php echo htmlspecialchars($subreddit->getSubredditName()); ?></h1>
+                    <p><?php echo htmlspecialchars($subreddit->getSubredditDescription()); ?></p>
+                    <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit->getSubredditID()); ?></p>
                     <ul class="admins-list">
                         <li class="admins-list-item">Board Admins: </li>
                         <?php foreach ($admins as $admin) : ?>
@@ -33,14 +33,19 @@
                                 <a href="index.php?action=viewUser&userID=<?php echo (htmlspecialchars($admin->getUserID())); ?>">
                                     <?php echo htmlspecialchars($admin->getUsername()); ?>
                                 </a>
+                                <?php if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
+                            <li class="admins-list-item">
+                                <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
                             </li>
-                        <?php endforeach; ?>
+                        <?php } ?>
+                        </li>
+                    <?php endforeach; ?>
                     </ul>
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <form action="subredditController.php" method="POST">
                             <input type="hidden" name="action" value="createPost">
-                            <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?>">
-                            <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($subreddit[0]->getSubredditID()); ?>">
+                            <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit->getSubredditName()); ?>">
+                            <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($subreddit->getSubredditID()); ?>">
                             <input type="submit" value="Create Your Own Post">
                         </form>
                     <?php } ?>
@@ -60,7 +65,7 @@
                                     <textarea placeholder="Post Content" name="postContent"></textarea>
                                 </div>
                                 <input type="hidden" name="action" value="createPost">
-                                <input type="hidden" name="subredditID" value="<?php echo $subreddit[0]->getSubredditID(); ?>">
+                                <input type="hidden" name="subredditID" value="<?php echo $subreddit->getSubredditID(); ?>">
                                 <?php if (!empty($postErrors)) { ?>
                                     <div class="error" style="margin-bottom: 20px" id="errors">
                                         <?php foreach ($postErrors as $error) { ?>

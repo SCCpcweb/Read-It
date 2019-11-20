@@ -50,11 +50,28 @@ class subredditDA
 
         foreach ($rows as $value) {
             $subreddit = new subreddit($value['subredditID'], $value['subredditName'], $value['subredditDescription']);
-            $subreddits[] = $subreddit;
         }
 
         $statement->closeCursor();
-        return $subreddits;
+        return $subreddit;
+    }
+
+    public static function update_board($id, $userID)
+    {
+        // $db = Database::getDB();
+
+        // $querySubreddits = 'SELECT * FROM subreddits where subredditID = :id';
+        // $statement = $db->prepare($querySubreddits);
+        // $statement->bindValue(':id', $id);
+        // $statement->execute();
+        // $rows = $statement->fetchAll();
+
+        // foreach ($rows as $value) {
+        //     $subreddit = new subreddit($value['subredditID'], $value['subredditName'], $value['subredditDescription']);
+        // }
+
+        // $statement->closeCursor();
+        // return $subreddit;
     }
 
     public static function add_subreddit_admin($subredditID, $userID)

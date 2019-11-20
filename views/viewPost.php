@@ -9,7 +9,7 @@ include_once("models/comment/Comment.php"); ?>
         <div class="container-main">
             <div class="post" style="margin-bottom: 30px">
                 <?php if (!empty($_SESSION['user'])) { ?>
-                    <?php include_once("views/components/voteButton.php"); ?>
+                    <?php include("views/components/voteButton.php"); ?>
                 <?php } ?>
 
                 <div class="post-content">
@@ -56,9 +56,15 @@ include_once("models/comment/Comment.php"); ?>
                         <p><?php echo htmlspecialchars(userDA::getUserByID($comment->getUserID())->getUsername()); ?></p>
                         <p><?php echo 'On: ' . htmlspecialchars($comment->getCommentTime()); ?></p>
                     </div>
+
                     <div class="comment-content">
                         <p><?php echo htmlspecialchars($comment->getCommentContent()); ?></p>
-                        <p>Rating: <?php echo htmlspecialchars($comment->getRating()); ?></p>
+                        <div class="rating-section">
+                            <p><?php echo htmlspecialchars($comment->getRating()); ?></p>
+                            <?php if (!empty($_SESSION['user'])) { ?>
+                                <?php include("views/components/commentVoteButton.php"); ?>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
 

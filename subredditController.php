@@ -33,7 +33,7 @@ switch ($action) {
         foreach ($adminIDs as $admin) {
             array_push($admins, userDA::getUserByID($admin));
         }
-        require 'views/viewSubreddit.php';
+        require 'views/subreddits/viewSubreddit.php';
         die();
         break;
     case 'createSubredditForm':
@@ -42,12 +42,23 @@ switch ($action) {
             break;
             die();
         } else {
-            require 'views/createSubredditForm.php';
+            require 'views/subreddits/createSubredditForm.php';
             die();
             break;
         }
     case 'createSubreddit':
         require 'models/subreddit/subredditValidation.php';
+        die();
+        break;
+    case 'editSubreddit':
+        $subreddit = subredditDA::get_board($_GET['subredditID']);
+        include("views/subreddits/editSubredditForm.php");
+        die();
+        break;
+    case 'editSubredditValidation':
+        echo $_POST['subredditID'];
+        $subreddit = subredditDA::get_board($_GET['subredditID']);
+        include("views/subreddits/editSubredditForm.php");
         die();
         break;
     case 'createPost':

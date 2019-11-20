@@ -22,7 +22,7 @@ if ($boardDescription === "" || $boardDescription === null) {
 
 if (!empty($boardErrors)) {
     // if there are errors go back to the page
-    include("views/createSubredditForm.php");
+    include("views/subreddits/createSubredditForm.php");
     exit();
 } else {
     subredditDA::insert_subreddit($boardName, $boardDescription, $_SESSION['user']->getUserID());
