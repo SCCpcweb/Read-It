@@ -453,6 +453,25 @@ h3 {
   margin-bottom: 5px;
 }
 
+.admins-list {
+  display: flex;
+  list-style: none;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.admins-list-item {
+  margin-right: 10px;
+}
+
+.admins-list-item a {
+  color: slateblue;
+}
+
+.admins-list-item a:hover {
+  text-decoration: underline;
+}
+
 @keyframes fade-in-top {
   from {
     opacity: 0;

@@ -25,7 +25,9 @@ if (!empty($boardErrors)) {
     include("views/createSubredditForm.php");
     exit();
 } else {
-    subredditDA::insert_subreddit($subredditID, $boardName, $boardDescription);
+    subredditDA::insert_subreddit($boardName, $boardDescription, $_SESSION['user']->getUserID());
+    $latestBoard = subredditDA::get_latest_board();
+    subredditDA::add_subreddit_admin($latestBoard->getSubredditID(), $_SESSION['user']->getUserID());
     header("Location: index.php?action=home");
 }
 

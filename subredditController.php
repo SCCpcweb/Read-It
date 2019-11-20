@@ -28,6 +28,11 @@ switch ($action) {
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
         $posts = postDA::get_posts_for_subreddit($subredditID);
+        $admins = [];
+        $adminIDs = subredditDA::get_subreddit_admins($subredditID);
+        foreach ($adminIDs as $admin) {
+            array_push($admins, userDA::getUserByID($admin));
+        }
         require 'views/viewSubreddit.php';
         die();
         break;

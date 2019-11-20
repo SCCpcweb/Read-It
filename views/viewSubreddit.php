@@ -26,7 +26,16 @@
                     <h1><?php echo htmlspecialchars($subreddit[0]->getSubredditName()); ?></h1>
                     <p><?php echo htmlspecialchars($subreddit[0]->getSubredditDescription()); ?></p>
                     <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit[0]->getSubredditID()); ?></p>
-                    <p>Board admins: WIP</p>
+                    <ul class="admins-list">
+                        <li class="admins-list-item">Board Admins: </li>
+                        <?php foreach ($admins as $admin) : ?>
+                            <li class="admins-list-item">
+                                <a href="index.php?action=viewUser&userID=<?php echo (htmlspecialchars($admin->getUserID())); ?>">
+                                    <?php echo htmlspecialchars($admin->getUsername()); ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <form action="subredditController.php" method="POST">
                             <input type="hidden" name="action" value="createPost">
