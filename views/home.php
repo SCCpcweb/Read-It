@@ -39,7 +39,7 @@
                 </p>
             </div>
         </div>
-        <?php include_once('views\components\usersSidebar.php'); ?>
+        <?php include('views\components\usersSidebar.php'); ?>
         <!-- <div class="container-sidebar-right">
             <p>Available Users:</p>
             <p>Work in progress</p>

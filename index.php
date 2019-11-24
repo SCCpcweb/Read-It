@@ -18,6 +18,8 @@ if ($action === null) {
     }
 }
 
+$_SESSION['users'] = userDA::get_all();
+
 switch ($action) {
     case 'home':
         $users = userDA::get_all();

@@ -108,7 +108,7 @@
                 } ?>
             </div>
         </div>
-        <?php include_once('views\components\usersSidebar.php'); ?>
+        <?php include('views\components\usersSidebar.php'); ?>
     </div>
     <script>
         document.getElementById("toggleButton").addEventListener("click", toggleButton);

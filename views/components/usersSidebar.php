@@ -1,3 +1,5 @@
+<?php $users = $_SESSION['users']; ?>
+
 <div class="container-sidebar-right">
     <h2>Available Users:</h2>
     <?php if (!empty($users)) {

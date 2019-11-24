@@ -21,6 +21,8 @@ if ($action === null) {
     }
 }
 
+$_SESSION['users'] = userDA::get_all();
+
 switch ($action) {
     case 'viewSubreddit':
         $users = userDA::get_all();
