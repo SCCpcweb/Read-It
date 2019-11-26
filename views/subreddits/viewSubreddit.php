@@ -33,13 +33,15 @@
                                 <a href="index.php?action=viewUser&userID=<?php echo (htmlspecialchars($admin->getUserID())); ?>">
                                     <?php echo htmlspecialchars($admin->getUsername()); ?>
                                 </a>
-                                <?php if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
+                                <?php if (!empty($_SESSION['user'])) {
+                                        if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
                             <li class="admins-list-item">
                                 <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
                             </li>
-                        <?php } ?>
-                        </li>
-                    <?php endforeach; ?>
+                    <?php }
+                        } ?>
+                    </li>
+                <?php endforeach; ?>
                     </ul>
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <form action="subredditController.php" method="POST">
@@ -110,6 +112,8 @@
         </div>
         <?php include('views\components\usersSidebar.php'); ?>
     </div>
+    <?php include('views/components/footer.php'); ?>
+
     <script>
         document.getElementById("toggleButton").addEventListener("click", toggleButton);
 

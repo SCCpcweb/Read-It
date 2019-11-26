@@ -11,16 +11,17 @@ $postContent = trim($postContent);
 // errors array
 $postErrors = [];
 if ($postContent === "" || $postContent === null) {
-    array_push($postErrors, "Must enter a board description");
+    array_push($postErrors, "Must enter post content");
 } else if (strlen($postContent) > 1500) {
     array_push($postErrors, "Post content must be less than 1500 characters");
 }
 
 if (!empty($postErrors)) {
     // if there are errors go back to the page
-    $_POST['subredditID'] = $subredditID;
-    $_POST['subredditName'] = subredditDA::get_board($subredditID)[0]->getSubredditName();
-    include('views/createPost.php');
+    // $_POST['subredditID'] = $subredditID;
+    // $_POST['subredditName'] = subredditDA::get_board($subredditID)->getSubredditName();
+    $post = postDA::get_post($postID);
+    include('views/posts/editPost.php');
 } else {
     postDA::update_post($_POST['postID'], $postContent);
     header("Location: subredditController.php?action=viewSubreddit&id=" . $subredditID);

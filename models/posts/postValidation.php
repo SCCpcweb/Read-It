@@ -29,7 +29,7 @@ if (!empty($postErrors)) {
     // if there are errors go back to the page
     $_POST['action'] = 'createPost';
     $_POST['subredditID'] = $subredditID;
-    $_POST['subredditName'] = subredditDA::get_board($subredditID)[0]->getSubredditName();
+    $_POST['subredditName'] = subredditDA::get_board($subredditID)->getSubredditName();
     include('views/createPost.php');
 } else {
     postDA::insert_post($subredditID, $_SESSION['user']->getUserID(), $postTitle, $postContent);

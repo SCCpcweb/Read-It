@@ -58,9 +58,8 @@ switch ($action) {
         die();
         break;
     case 'editSubredditValidation':
-        echo $_POST['subredditID'];
-        $subreddit = subredditDA::get_board($_GET['subredditID']);
-        include("views/subreddits/editSubredditForm.php");
+        $subreddit = subredditDA::get_board($_POST['subredditID']);
+        require("models/subreddit/editSubredditValidation.php");
         die();
         break;
     case 'createPost':
@@ -87,7 +86,7 @@ switch ($action) {
         die();
         break;
     case 'postValidation':
-        require('models/postValidation.php');
+        require('models/posts/postValidation.php');
         die();
         break;
     case 'commentValidation':

@@ -18,8 +18,6 @@ if (!empty($boardErrors)) {
     include("views/subreddits/editSubredditForm.php");
     exit();
 } else {
-    subredditDA::update_board($subreddit->getSubredditID(), $_SESSION['user']->getUserID());
+    subredditDA::update_board($subreddit->getSubredditID(), $_SESSION['user']->getUserID(), $boardDescription);
     header("Location: subredditController.php?action=viewSubreddit&id=" . $subreddit->getSubredditID());
 }
-
-echo $boardName . ' ' . $boardDescription;

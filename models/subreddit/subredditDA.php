@@ -56,22 +56,22 @@ class subredditDA
         return $subreddit;
     }
 
-    public static function update_board($id, $userID)
+    public static function update_board($id, $userID, $subredditDescription)
     {
-        // $db = Database::getDB();
+        $db = Database::getDB();
 
-        // $querySubreddits = 'SELECT * FROM subreddits where subredditID = :id';
-        // $statement = $db->prepare($querySubreddits);
-        // $statement->bindValue(':id', $id);
-        // $statement->execute();
-        // $rows = $statement->fetchAll();
+        $querySubreddits = 'UPDATE subreddits s
+                            JOIN subredditadmins sa on s.subredditID = sa.subredditID
+                            SET subredditDescription = :subredditDescription
+                            WHERE s.subredditID = :subredditID
+                            AND sa.userID = :userID';
+        $statement = $db->prepare($querySubreddits);
+        $statement->bindValue(':subredditID', $id);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':subredditDescription', $subredditDescription);
+        $statement->execute();
 
-        // foreach ($rows as $value) {
-        //     $subreddit = new subreddit($value['subredditID'], $value['subredditName'], $value['subredditDescription']);
-        // }
-
-        // $statement->closeCursor();
-        // return $subreddit;
+        $statement->closeCursor();;
     }
 
     public static function add_subreddit_admin($subredditID, $userID)

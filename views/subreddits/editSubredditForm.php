@@ -30,6 +30,7 @@
                     <label>Board Manager</label>
                     <p class="greyCard"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                 </div>
+                <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($_REQUEST['subredditID']); ?>">
                 <input type="hidden" name="action" value="editSubredditValidation">
                 <input type="submit" value="Edit Board">
             </form>
