@@ -60,4 +60,30 @@ class postDA
         $statement->closeCursor();
         return $posts;
     }
+
+    public static function delete_post_by_postID($postID, $adminID)
+    {
+        $db = Database::getDB();
+
+        // potential delete query (kind of)
+        // - Select
+        // 'SELECT posts.postID, posts.subredditID, sa.userID as "Admin ID" from posts
+        // JOIN subredditAdmins sa on posts.userID = sa.userID'
+
+        // - Delete
+        // DELETE p from posts p
+        // JOIN subredditAdmins sa on p.userid = sa.userid
+        // WHERE sa.userid = 1
+        // AND p.postID = 34;
+
+        $deletePost = 'DELETE p
+                       from posts
+                       JOIN subredditAdmins sa on posts.userid = sa.userid
+                       WHERE sa.userid = :adminID
+                       AND p.postID = :postID';
+        $statement = $db->prepare($deletePost);
+        $statement->bindValue(':userID', $adminID);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+    }
 }

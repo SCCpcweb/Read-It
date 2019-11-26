@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2019 at 01:04 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Generation Time: Nov 26, 2019 at 09:22 PM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -49,8 +49,8 @@ CREATE TABLE `comments` (
   `postID` int(11) NOT NULL,
   `subredditID` int(11) NOT NULL,
   `commentContent` varchar(500) NOT NULL,
-  `commentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `rating` int(11) NOT NULL DEFAULT '0'
+  `commentTime` timestamp NOT NULL DEFAULT current_timestamp(),
+  `rating` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -58,12 +58,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`commentID`, `userID`, `postID`, `subredditID`, `commentContent`, `commentTime`, `rating`) VALUES
-(1, 29, 21, 1, 'd', '2019-11-19 07:32:22', 5),
-(2, 29, 21, 1, 'comment 2', '2019-11-19 07:48:32', 0),
-(3, 29, 26, 3, 'Heya yee', '2019-11-19 11:06:26', 0),
-(7, 36, 25, 1, 'yeet comment', '2019-11-19 11:35:24', 0),
-(8, 36, 21, 1, 'dfgdfg', '2019-11-19 11:58:20', 0),
-(9, 29, 21, 1, 'this is a comment with some content', '2019-11-20 16:10:58', 0);
+(10, 36, 35, 17, 'Here\'s a comment', '2019-11-26 18:49:00', 0);
 
 -- --------------------------------------------------------
 
@@ -90,8 +85,8 @@ CREATE TABLE `posts` (
   `userID` int(11) NOT NULL,
   `postTitle` varchar(64) NOT NULL,
   `postContent` varchar(1500) NOT NULL,
-  `postTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `rating` int(11) NOT NULL DEFAULT '0'
+  `postTime` datetime NOT NULL DEFAULT current_timestamp(),
+  `rating` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -99,15 +94,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`postID`, `subredditID`, `userID`, `postTitle`, `postContent`, `postTime`, `rating`) VALUES
-(21, 1, 36, 'time', 'oh boy', '2019-11-25 17:13:35', 0),
-(23, 1, 36, '--', 'yeeby', '2019-11-16 12:07:37', 0),
-(24, 1, 29, 'another test post', 'yeet', '2019-11-16 15:38:30', 0),
-(25, 1, 29, 'test', 'sadasdfg', '2019-11-16 16:29:58', 0),
-(26, 3, 29, 'post', 'yee', '2019-11-16 16:19:00', 0),
-(27, 3, 29, 'dddddddddd', 'd', '2019-11-16 04:07:49', 0),
-(28, 3, 29, 'Science psot', 's', '2019-11-16 04:11:06', 0),
-(33, 10, 36, 'fff', 'f', '2019-11-19 05:58:36', 0),
-(34, 17, 36, 'Admin post', 'edited content free 3', '2019-11-25 17:10:17', 0);
+(35, 17, 36, 'Post title', 'Yee', '2019-11-26 12:49:09', 0),
+(36, 17, 29, 'Shookstra psot', 'test post for deleting posts', '2019-11-26 02:17:50', 0);
 
 -- --------------------------------------------------------
 
@@ -173,7 +161,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userID`, `username`, `email`, `password`) VALUES
 (29, 'shookstra', 'sam@gmail.com', '$2y$11$gLlBhWcpUJgbuvmLwOtCluWEEv08Pd30tzJCVAXUEMDblzoYp.ZB2'),
-(36, 'Sam1', 'sam1@gmail.com', '$2y$11$dwEEypwYinaL8oc0W7sTn.L4m.ITDOITuwKd60gae2ZvUN905G1sC');
+(36, 'Sam1', 'sam1@gmail.com', '$2y$11$dwEEypwYinaL8oc0W7sTn.L4m.ITDOITuwKd60gae2ZvUN905G1sC'),
+(37, 'TestUser', 'testEmail@gmail.com', '$2y$11$9fC9pJxpa6siq9bytGxvMu4FiILQowsYFj8Brh3mx4RhvI2ewk4lu'),
+(38, 'TestUser2', 'testEmail2@gmail.com', '$2y$11$rR3maBtGJBJtliqI2j8HQe8Eum..l7sk5pMdTOGPzkH8Sfq43CR3C');
 
 --
 -- Indexes for dumped tables
@@ -243,7 +233,7 @@ ALTER TABLE `commentlikes`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `postlikes`
@@ -255,7 +245,7 @@ ALTER TABLE `postlikes`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `subreddits`
@@ -267,7 +257,7 @@ ALTER TABLE `subreddits`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables
