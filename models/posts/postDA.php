@@ -50,10 +50,11 @@ class postDA
         $statement->bindValue(':userID', $userID);
         $statement->execute();
         $rows = $statement->fetchAll();
+        $posts = [];
 
         foreach ($rows as $value) {
             $post = new post($value['postID'], $value['subredditID'], $value['userID'], $value['postTitle'], $value['postContent'], $value['postTime'], $value['rating']);
-            $posts[] = $post;
+            array_push($posts, $post);
         }
 
         $statement->closeCursor();
