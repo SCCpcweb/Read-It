@@ -79,4 +79,4 @@ $hashedPassword = password_hash($_POST['password-signUp'], PASSWORD_BCRYPT, $opt
 // insert user
 $users = userDA::insert_user('', $username, $email, $hashedPassword);
 $_SESSION['username'] = $username;
-header('location: /index.php?action=profile');
+header('Location: index.php?action=profile');

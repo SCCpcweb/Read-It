@@ -52,37 +52,6 @@
                         </form>
                     <?php } ?>
                 </div>
-
-                <!-- <?php if (!empty($_SESSION['user'])) { ?>
-                    <div style="flex: 5">
-                        <div class="form-creation-tool" id="form-creation-tool">
-                            <h2>Post Creation Tool</h2>
-                            <form action="subredditController.php" method="POST">
-                                <div class="formElement">
-                                    <label for="postTitle">Post Title</label>
-                                    <input type="text" placeholder="Post Title" name="postTitle">
-                                </div>
-                                <div class="formElement">
-                                    <label for="postContent">Post Content</label>
-                                    <textarea placeholder="Post Content" name="postContent"></textarea>
-                                </div>
-                                <input type="hidden" name="action" value="createPost">
-                                <input type="hidden" name="subredditID" value="<?php echo $subreddit->getSubredditID(); ?>">
-                                <?php if (!empty($postErrors)) { ?>
-                                    <div class="error" style="margin-bottom: 20px" id="errors">
-                                        <?php foreach ($postErrors as $error) { ?>
-                                            <p><?php echo htmlspecialchars($error); ?></p>
-                                        <?php } ?>
-                                    </div>
-                                <?php } ?>
-                                <?php if (!empty($_SESSION['username'])) : ?>
-                                    <input type="submit" value="Create Post" id="createPost">
-                                    <input type="hidden" name="action" value="createPost">
-                                <?php endif ?>
-                            </form>
-                        </div>
-                    </div>
-                <?php } ?> -->
             </div>
             <div class="posts">
                 <?php
@@ -102,6 +71,16 @@
                                 <p><?php echo 'By: ' . htmlspecialchars(userDA::getUserByID($post->getUserID())->getUsername()) ?></p>
                                 <p><?php echo 'On: ' . htmlspecialchars($post->getPostTime()) ?></p>
                                 <p><?php echo 'Rating: ' . htmlspecialchars($post->getRating()); ?></p>
+                                <?php foreach ($admins as $admin) : ?>
+                                    <?php if (!empty($_SESSION['user'])) {
+                                                    if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
+                                            <form action="subredditController.php" class="delete-link">
+                                                <input type="hidden" value="<?php echo htmlspecialchars($post->getPostID()); ?>" />
+                                                <input type="submit" value="Delete Post" />
+                                            </form>
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php endforeach ?>
                             </div>
                         </div>
                 <?php }

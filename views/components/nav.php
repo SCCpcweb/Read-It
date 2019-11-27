@@ -24,7 +24,7 @@
         <!-- Display their username if they are logged in -->
         <div class="links-username">
             <?php if (!empty($_SESSION['username'])) { ?>
-                <a href="index.php?action=profile"><?php echo ($_SESSION['username']); ?></a>
+                <a href="index.php?action=profile"><?php echo ($_SESSION['username'] . '\'s Profile'); ?></a>
             <?php } ?>
         </div>
     </div>
@@ -45,17 +45,16 @@
                 <?php } ?>
                 <!-- Logout if a user is signed in -->
                 <?php if (!empty($_SESSION['username'])) { ?>
-                    <div class="link">
-                        <a href="index.php?action=logout">Log Out</a>
-                    </div>
+                    <a href="index.php?action=logout" class="link">Log Out</a>
                 <?php } ?>
                 <!-- Display their username if they are logged in -->
                 <div class="links-username">
                     <?php if (!empty($_SESSION['username'])) { ?>
-                        <a href="index.php?action=profile"><?php echo ($_SESSION['username']); ?></a>
+                        <a href="index.php?action=profile"><?php echo ($_SESSION['username'] . '\'s Profile'); ?></a>
                     <?php } ?>
                 </div>
-                <?php include('views\components\usersSidebar.php'); ?>
+                <?php //include('views\components\usersSidebar.php'); 
+                ?>
             </div>
         </div>
     </div>
