@@ -61,7 +61,11 @@ class postDA
         }
 
         $statement->closeCursor();
-        return $post;
+        if (empty($post)) {
+            return 'No posts found';
+        } else {
+            return $post;
+        }
     }
 
     public static function update_post($postID, $postContent)

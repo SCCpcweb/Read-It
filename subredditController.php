@@ -30,6 +30,7 @@ switch ($action) {
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
         $posts = postDA::get_posts_for_subreddit($subredditID);
+        $_SESSION['lastVisitedBoard'] = $subredditID;
         $admins = [];
         $adminIDs = subredditDA::get_subreddit_admins($subredditID);
         foreach ($adminIDs as $admin) {
@@ -102,9 +103,13 @@ switch ($action) {
     case 'deletePost':
         // deletes the post and uses the posts subreddit id to redirect the user back
         // to that board
-        $post = postDA::get_post($_POST['postID']);
-        postDA::delete_post($_POST['postID'], $_SESSION['user']->getUserID());
-        header("Location: subredditController.php?action=viewSubreddit&id=" . $post->getSubredditID());
+        $post = postDA::get_post($_REQUEST['postID']);
+        if ($post === 'No posts found') {
+            header("Location: subredditController.php?action=viewSubreddit&id=" . $_SESSION['lastVisitedBoard']);
+        } else {
+            postDA::delete_post($_REQUEST['postID'], $_SESSION['user']->getUserID());
+            header("Location: subredditController.php?action=viewSubreddit&id=" . $post->getSubredditID());
+        }
         die();
         break;
 }

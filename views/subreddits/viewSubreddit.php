@@ -75,7 +75,8 @@
                                     <?php if (!empty($_SESSION['user'])) {
                                                     if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
                                             <form action="subredditController.php" class="delete-link">
-                                                <input type="hidden" value="<?php echo htmlspecialchars($post->getPostID()); ?>" />
+                                                <input type="hidden" value="<?php echo htmlspecialchars($post->getPostID()); ?>" name="postID" />
+                                                <input type="hidden" value="deletePost" name="action" />
                                                 <input type="submit" value="Delete Post" />
                                             </form>
                                         <?php } ?>
