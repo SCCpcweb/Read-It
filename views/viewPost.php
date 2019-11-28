@@ -7,6 +7,7 @@ include_once("models/comment/Comment.php"); ?>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
         <div class="container-main">
+            <h1><?php echo htmlspecialchars($subreddit->getSubredditName()); ?></h1>
             <div class="post" style="margin-bottom: 30px">
                 <?php if (!empty($_SESSION['user'])) { ?>
                     <?php include("views/components/voteButton.php"); ?>
