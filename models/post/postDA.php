@@ -1,7 +1,7 @@
 <?php
 
 require_once 'models/database.php';
-require_once 'models/post/post.php';
+require_once 'models/posts/post.php';
 
 class postDA
 {

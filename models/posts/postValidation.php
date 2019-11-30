@@ -1,6 +1,6 @@
 <?php
 
-require_once 'models/post/postDA.php';
+require_once 'models/posts/postDA.php';
 require_once 'models/user.php';
 
 // user inputs

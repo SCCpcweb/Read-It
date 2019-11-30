@@ -1,7 +1,7 @@
 <?php
 
 require_once 'models/comment/commentDA.php';
-require_once 'models/post/postDA.php';
+require_once 'models/posts/postDA.php';
 require_once 'models/comment/comment.php';
 
 // user input

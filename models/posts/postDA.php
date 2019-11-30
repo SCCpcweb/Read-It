@@ -2,6 +2,8 @@
 
 require_once 'models/database.php';
 require_once 'models/posts/post.php';
+require_once 'models/likes/postLike.php';
+
 
 class postDA
 {
@@ -20,6 +22,49 @@ class postDA
         $statement->bindValue(':postTime', $postTime);
         $statement->execute();
         $statement->closeCursor();
+    }
+
+    public static function get_post($postID)
+    {
+        $db = Database::getDB();
+
+        $queryPost = 'SELECT * FROM posts where postID = :postID';
+        $statement = $db->prepare($queryPost);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $post = new post($value['postID'], $value['subredditID'], $value['userID'], $value['postTitle'], $value['postContent'], $value['postTime'], $value['rating']);
+        }
+
+        $statement->closeCursor();
+        if (empty($post)) {
+            return 'No posts found';
+        } else {
+            return $post;
+        }
+    }
+
+    public static function get_posts_for_subreddit($subredditID)
+    {
+        $db = Database::getDB();
+
+        //$queryUser = 'SELECT * FROM users WHERE username like "SamHookstra"';
+        $queryPosts = 'SELECT * FROM posts where subredditID = :subredditID';
+        $statement = $db->prepare($queryPosts);
+        $statement->bindValue(':subredditID', $subredditID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $posts = [];
+
+        foreach ($rows as $value) {
+            $post = new post($value['postID'], $value['subredditID'], $value['userID'], $value['postTitle'], $value['postContent'], $value['postTime'], $value['rating']);
+            array_push($posts, $post);
+        }
+
+        $statement->closeCursor();
+        return $posts;
     }
 
     public static function get_all_posts_from_subreddit($id)
@@ -85,5 +130,105 @@ class postDA
         $statement->bindValue(':userID', $adminID);
         $statement->bindValue(':postID', $postID);
         $statement->execute();
+    }
+
+    public static function like_post($postID)
+    {
+        $db = Database::getDB();
+
+        $likePost = 'UPDATE posts
+                     SET rating = rating + 1
+                     WHERE postID = :postID';
+        $statement = $db->prepare($likePost);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+    }
+
+    public static function dislike_post($postID)
+    {
+        $db = Database::getDB();
+
+        $likePost = 'UPDATE posts
+                     SET rating = rating - 1
+                     WHERE postID = :postID';
+        $statement = $db->prepare($likePost);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+    }
+
+    public static function add_to_post_likes($postID, $userID, $likeOrDislike)
+    {
+        $db = Database::getDB();
+
+        $query = 'INSERT INTO postlikes(likeID, postID, userID, likeOrDislike)
+                                VALUES(:likeID, :postID, :userID, :likeOrDislike)';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':likeID', '');
+        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':likeOrDislike', $likeOrDislike);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public static function update_post_likes($postID, $userID, $likeOrDislike)
+    {
+        $db = Database::getDB();
+
+        $query = 'UPDATE postlikes
+                  set likeOrDislike = :likeOrDislike
+                  WHERE postID = :postID
+                  AND userID = :userID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':likeOrDislike', $likeOrDislike);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public static function has_liked($postID, $userID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT *
+                  FROM postlikes
+                  WHERE userID = :userID
+                  AND postID = :postID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $rows = $statement->fetch();
+        $statement->closeCursor();
+
+        if (empty($rows)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static function check_likes($postID, $userID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT *
+                  FROM postlikes
+                  WHERE userID = :userID
+                  AND postID = :postID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $like = new PostLike($value['likeID'], $value['postID'], $value['userID'], $value['likeOrDislike']);
+        }
+
+        $statement->closeCursor();
+
+        return $like;
     }
 }

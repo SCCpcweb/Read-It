@@ -2,8 +2,8 @@
 
 require_once 'models/database.php';
 require_once 'models/subreddit/subredditDA.php';
-require_once 'models/post/postDA.php';
-require_once 'models/post/post.php';
+require_once 'models/posts/postDA.php';
+require_once 'models/posts/post.php';
 require_once 'models/user.php';
 require_once 'models/userDA.php';
 require_once 'models/comment/commentDA.php';
@@ -75,6 +75,45 @@ switch ($action) {
         $subreddit = subredditDA::get_board($post->getSubredditID());
         $comments = commentDA::get_comments_by_postID($post->getPostID());
         include("views/viewPost.php");
+        die();
+        break;
+    case 'likePost':
+        $hasVoted = postDA::has_liked($_REQUEST['postID'], $_SESSION['user']->getUserID());
+        // determines if a user has voted yet or not
+        // if not, add the vote to the DB
+        if ($hasVoted === false) {
+            postDA::like_post($_REQUEST['postID']);
+            postDA::add_to_post_likes($_REQUEST['postID'], $_SESSION['user']->getUserID(), 'like');
+        } else {
+            // if they have, check if the vote was a "like"
+            // if it wasn't increment the rating of the post by 1
+            $like = postDA::check_likes($_REQUEST['postID'], $_SESSION['user']->getUserID());
+            if ($like->getLikeOrDislike() !== 'like') {
+                postDA::like_post($_REQUEST['postID']);
+                postDA::update_post_likes($_REQUEST['postID'], $_SESSION['user']->getUserID(), 'like');
+            }
+        }
+        header('Location: subredditController.php?action=viewPost&postID=' . $_REQUEST['postID']);
+        die();
+        break;
+    case 'dislikePost':
+        $hasVoted = postDA::has_liked($_REQUEST['postID'], $_SESSION['user']->getUserID());
+        // determines if a user has voted yet or not
+        // if not, add the vote to the DB
+        if ($hasVoted === false) {
+            postDA::dislike_post($_REQUEST['postID']);
+            postDA::add_to_post_likes($_REQUEST['postID'], $_SESSION['user']->getUserID(), 'dislike');
+        } else {
+            // if they have, check if the vote was a "dislike"
+            // if it wasn't decrement the rating of the post by 1
+            $like = postDA::check_likes($_REQUEST['postID'], $_SESSION['user']->getUserID());
+            if ($like->getLikeOrDislike() !== 'dislike') {
+                postDA::dislike_post($_REQUEST['postID']);
+                postDA::update_post_likes($_REQUEST['postID'], $_SESSION['user']->getUserID(), 'dislike');
+            }
+        }
+
+        header('Location: subredditController.php?action=viewPost&postID=' . $_REQUEST['postID']);
         die();
         break;
     case 'editPost':
