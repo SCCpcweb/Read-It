@@ -29,19 +29,22 @@
                     <ul class="admins-list">
                         <li class="admins-list-item">Board Admins: </li>
                         <?php foreach ($admins as $admin) : ?>
+                            <?php if (!empty($_SESSION['user'])) {
+                                    if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
+                                    <li class="admins-list-item">
+                                        <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
+                                    </li>
+                                    <li class="admins-list-item">
+                                        <a href="#">Add admin (WIP)</a>
+                                    </li>
+                            <?php }
+                                } ?>
                             <li class="admins-list-item">
                                 <a href="index.php?action=viewUser&userID=<?php echo (htmlspecialchars($admin->getUserID())); ?>">
                                     <?php echo htmlspecialchars($admin->getUsername()); ?>
                                 </a>
-                                <?php if (!empty($_SESSION['user'])) {
-                                        if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
-                            <li class="admins-list-item">
-                                <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
                             </li>
-                    <?php }
-                        } ?>
-                    </li>
-                <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <form action="subredditController.php" method="POST">
