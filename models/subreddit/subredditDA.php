@@ -20,6 +20,7 @@ class subredditDA
         $statement->closeCursor();
     }
 
+    // retrieves all subreddits from the DB
     public static function get_all()
     {
         $db = Database::getDB();
@@ -38,6 +39,7 @@ class subredditDA
         return $subreddits;
     }
 
+    // retrives a single board based on the passed ID
     public static function get_board($id)
     {
         $db = Database::getDB();
@@ -56,6 +58,7 @@ class subredditDA
         return $subreddit;
     }
 
+    // updates a board's information fields
     public static function update_board($id, $userID, $subredditDescription)
     {
         $db = Database::getDB();
@@ -74,6 +77,7 @@ class subredditDA
         $statement->closeCursor();;
     }
 
+    // adds an admin to the tables of admins
     public static function add_subreddit_admin($subredditID, $userID)
     {
         $db = Database::getDB();
@@ -86,6 +90,7 @@ class subredditDA
         $statement->closeCursor();
     }
 
+    // retrieves only the latest board created
     public static function get_latest_board()
     {
         $db = Database::getDB();
@@ -104,6 +109,7 @@ class subredditDA
         return $subreddit;
     }
 
+    // retrieves all admins from the DB
     public static function get_subreddit_admins($subredditID)
     {
         $db = Database::getDB();

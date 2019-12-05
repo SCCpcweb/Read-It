@@ -26,19 +26,32 @@
                     <h1><?php echo htmlspecialchars($subreddit->getSubredditName()); ?></h1>
                     <p><?php echo htmlspecialchars($subreddit->getSubredditDescription()); ?></p>
                     <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit->getSubredditID()); ?></p>
+                    <?php if (!empty($_SESSION['user'])) { ?>
+                        <?php if (in_array($_SESSION['user']->getUserName(), $adminUsernames)) { ?>
+                            <ul class="admins-list">
+                                <li class="admins-list-item">Admin Actions: </li>
+                                <li class="admins-list-item">
+                                    <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
+                                </li>
+                            </ul>
+                            <form action="subredditController.php" method="POST" class="addAdminForm">
+                                <p class="addAdminForm-item">Add Admin:</p>
+                                <select name="adminsList" id="adminsList" class="addAdminForm-item addAdminForm-select">
+                                    <?php foreach ($users as $user) { ?>
+                                        <option value="<?php echo $user->getUserID(); ?>">
+                                            <?php echo htmlspecialchars($user->getUsername()); ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                                <input type="hidden" value="addAdminValidation" name="action">
+                                <input type="submit" value="Add Admin" class="addAdminForm-item">
+                            </form>
+                        <?php } ?>
+                    <?php } ?>
+
                     <ul class="admins-list">
                         <li class="admins-list-item">Board Admins: </li>
                         <?php foreach ($admins as $admin) : ?>
-                            <?php if (!empty($_SESSION['user'])) {
-                                    if ($admin->getUserID() == $_SESSION['user']->getUserID()) { ?>
-                                    <li class="admins-list-item">
-                                        <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
-                                    </li>
-                                    <li class="admins-list-item">
-                                        <a href="#">Add admin (WIP)</a>
-                                    </li>
-                            <?php }
-                                } ?>
                             <li class="admins-list-item">
                                 <a href="index.php?action=viewUser&userID=<?php echo (htmlspecialchars($admin->getUserID())); ?>">
                                     <?php echo htmlspecialchars($admin->getUsername()); ?>
@@ -46,6 +59,7 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
+
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <form action="subredditController.php" method="POST">
                             <input type="hidden" name="action" value="createPost">

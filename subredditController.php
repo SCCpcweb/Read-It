@@ -32,9 +32,12 @@ switch ($action) {
         $posts = postDA::get_posts_for_subreddit($subredditID);
         $_SESSION['lastVisitedBoard'] = $subredditID;
         $admins = [];
+        $adminUsernames = [];
         $adminIDs = subredditDA::get_subreddit_admins($subredditID);
         foreach ($adminIDs as $admin) {
-            array_push($admins, userDA::getUserByID($admin));
+            $currentAdmin = userDA::getUserByID($admin);
+            array_push($admins, $currentAdmin);
+            array_push($adminUsernames, $currentAdmin->getUsername());
         }
         require 'views/subreddits/viewSubreddit.php';
         die();
@@ -140,8 +143,15 @@ switch ($action) {
         include('views/comments/createCommentForm.php');
         die();
         break;
+    case 'addAdminValidation':
+        $adminIDToAdd = $_REQUEST['adminsList'];
+        subredditDA::add_subreddit_admin($_SESSION['lastVisitedBoard'], $adminIDToAdd);
+        // require("models/subreddit/addAdminValidation.php");
+        header("Location: subredditController.php?action=viewSubreddit&id=" . $_SESSION['lastVisitedBoard']);
+        die();
+        break;
     case 'deletePost':
-        // deletes the post and uses the posts subreddit id to redirect the user back
+        // deletes the post and uses the post's subreddit id to redirect the user back
         // to that board
         $post = postDA::get_post($_REQUEST['postID']);
         if ($post === 'No posts found') {

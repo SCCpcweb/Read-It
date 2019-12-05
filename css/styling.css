@@ -662,6 +662,23 @@ h3 {
   color: slateblue;
 }
 
+.addAdminForm {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.addAdminForm-item {
+  margin: 0 10px;
+}
+
+.addAdminForm-select {
+  padding: 5px 10px;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     padding: 0;

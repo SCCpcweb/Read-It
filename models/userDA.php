@@ -5,6 +5,7 @@ require_once('models/user.php');
 
 class userDA
 {
+    // retrieves all users from the DB
     public static function get_all()
     {
         $db = Database::getDB();
@@ -23,6 +24,7 @@ class userDA
         return $users;
     }
 
+    // inserts a single user into the DB
     public static function insert_user($userID, $username, $email, $password)
     {
         $db = Database::getDB();
@@ -38,6 +40,7 @@ class userDA
         $statement->closeCursor();
     }
 
+    // DB call to log the user in
     // returns the username if the credentials were correct
     public static function login($username, $password)
     {

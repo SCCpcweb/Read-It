@@ -78,7 +78,7 @@ class postDA
         $rows = $statement->fetchAll();
 
         foreach ($rows as $value) {
-            $post = new post($value['postID'], $value['subredditID'], $value['userID'], $value['postTitle'], $value['postContent'], $value['postTime']);
+            $post = new post($value['postID'], $value['subredditID'], $value['userID'], $value['postTitle'], $value['postContent'], $value['postTime'], $value['rating']);
             $posts[] = $post;
         }
 
