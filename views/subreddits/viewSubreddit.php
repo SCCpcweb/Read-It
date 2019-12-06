@@ -6,7 +6,7 @@
 <body>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
-        <?php include('views/components/boardSidebar.php'); ?>
+        <span class="display-block"><?php include('views/components/boardSidebar.php'); ?></span>
         <div class="container-main">
             <div class="top-content">
                 <div class="board-info">
@@ -94,23 +94,9 @@
                 } ?>
             </div>
         </div>
-        <?php include('views\components\usersSidebar.php'); ?>
+        <span class="display-block"><?php include('views\components\usersSidebar.php'); ?></span>
     </div>
     <?php include('views/components/footer.php'); ?>
-
-    <script>
-        document.getElementById("toggleButton").addEventListener("click", toggleButton);
-
-        function toggleButton() {
-            var formCreationTool = document.getElementById('form-creation-tool');
-
-            if (formCreationTool.style.display == 'none') {
-                formCreationTool.style.display = 'block';
-            } else {
-                formCreationTool.style.display = 'none';
-            }
-        }
-    </script>
 </body>
 
 </html>

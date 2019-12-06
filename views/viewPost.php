@@ -6,6 +6,7 @@ include_once("models/comment/Comment.php"); ?>
 <body>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
+        <?php include("views/components/boardSidebar.php"); ?>
         <div class="container-main">
             <h1><?php echo htmlspecialchars($subreddit->getSubredditName()); ?></h1>
             <div class="post" style="margin-bottom: 30px">

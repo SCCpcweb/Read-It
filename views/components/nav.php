@@ -53,8 +53,8 @@
                         <a href="index.php?action=profile"><?php echo ($_SESSION['username'] . '\'s Profile'); ?></a>
                     <?php } ?>
                 </div>
-                <?php //include('views\components\usersSidebar.php'); 
-                ?>
+                <span class="display-none"><?php include('views\components\usersSidebar.php'); ?></span>
+                <span class="display-none"><?php include('views\components\boardSidebar.php'); ?></span>
             </div>
         </div>
     </div>

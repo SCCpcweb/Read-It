@@ -153,6 +153,7 @@ h4 {
   border-radius: 6px;
   background-color: #eee;
   padding: 10px;
+  height: 100%;
 }
 
 .container-sidebar ul {
@@ -195,6 +196,7 @@ h4 {
   border-radius: 8px;
   flex: 1;
   padding: 10px;
+  height: 100%;
 }
 
 .container .link {
@@ -698,7 +700,15 @@ h3 {
   background-color: slateblue;
 }
 
-@media only screen and (max-width: 600px) {
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+@media only screen and (max-width: 1200px) {
   .container {
     padding: 0;
     /* margin: 0 auto; */
@@ -744,9 +754,20 @@ h3 {
     display: none;
   }
 
+  .container-sidebar {
+    background-color: white;
+  }
+
+  .container-sidebar p,
+  h1,
+  h2 {
+    color: rgb(50, 50, 50);
+  }
+
   .container-sidebar-right {
     background: white;
     color: rgb(50, 50, 50);
+    margin: 10px 0;
   }
 
   .container-sidebar-right a {
@@ -770,5 +791,13 @@ h3 {
 
   .links-username a:hover {
     color: rgb(200, 200, 200);
+  }
+
+  .display-none {
+    display: block;
+  }
+
+  .display-block {
+    display: none;
   }
 }

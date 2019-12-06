@@ -109,7 +109,7 @@ class subredditDA
         return $subreddit;
     }
 
-    // retrieves all admins from the DB
+    // retrieves all admin IDs from the DB for a subreddit
     public static function get_subreddit_admins($subredditID)
     {
         $db = Database::getDB();

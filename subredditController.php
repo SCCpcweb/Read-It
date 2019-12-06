@@ -21,12 +21,15 @@ if ($action === null) {
     }
 }
 
+// set all users into the session
+// these are used in the "container-sidebar-right" to display all users
 $_SESSION['users'] = userDA::get_all();
+// retrieve all subreddits from the DB
+$subreddits = subredditDA::get_all();
 
 switch ($action) {
     case 'viewSubreddit':
         $users = userDA::get_all();
-        $subreddits = subredditDA::get_all();
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
         $posts = postDA::get_posts_for_subreddit($subredditID);
