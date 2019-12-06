@@ -56,6 +56,7 @@ input[type="submit"] {
   transition: 0.3s;
   border: none;
   font-size: 16px;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
@@ -677,6 +678,24 @@ h3 {
 
 .addAdminForm-select {
   padding: 5px 10px;
+}
+
+.btn {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .3);
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin: 20px 0 0 0;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: color 250ms, background-color 250ms;
+}
+
+.btn:hover,
+.btn:focus {
+  color: white;
+  background-color: slateblue;
 }
 
 @media only screen and (max-width: 600px) {

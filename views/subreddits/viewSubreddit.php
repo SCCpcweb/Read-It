@@ -6,20 +6,7 @@
 <body>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
-        <div class="container-sidebar">
-            <h2>Available Boards</h2>
-            <p style="font-style: italic">Maybe you'd like to create one yourself?</p>
-            <a href="subredditController.php?action=createSubredditForm">Create a Board</a>
-            <ul class="boards">
-                <?php foreach ($subreddits as $board) : ?>
-                    <li>
-                        <a href="subredditController.php?action=viewSubreddit&amp;id=<?php echo htmlspecialchars($board->getSubredditID()); ?>">
-                            <?php echo htmlspecialchars($board->getSubredditName()); ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+        <?php include('views/components/boardSidebar.php'); ?>
         <div class="container-main">
             <div class="top-content">
                 <div class="board-info">
