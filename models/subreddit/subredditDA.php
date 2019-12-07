@@ -77,7 +77,7 @@ class subredditDA
         $statement->closeCursor();;
     }
 
-    // adds an admin to the tables of admins
+    // adds an admin to the table of admins
     public static function add_subreddit_admin($subredditID, $userID)
     {
         $db = Database::getDB();
@@ -86,6 +86,21 @@ class subredditDA
         $statement = $db->prepare($addAdmin);
         $statement->bindValue(':subredditID', $subredditID);
         $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    // deletes an admin from the table of admins
+    public static function delete_subreddit_admin($subredditID, $userID)
+    {
+        $db = Database::getDB();
+
+        $deleteAdmin = 'DELETE FROM subredditAdmins 
+                        WHERE userID = :userID
+                        AND subredditID = :subredditID';
+        $statement = $db->prepare($deleteAdmin);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':subredditID', $subredditID);
         $statement->execute();
         $statement->closeCursor();
     }

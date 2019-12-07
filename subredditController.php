@@ -29,6 +29,7 @@ $subreddits = subredditDA::get_all();
 
 switch ($action) {
     case 'viewSubreddit':
+        // all registered users
         $users = userDA::get_all();
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
@@ -37,10 +38,19 @@ switch ($action) {
         $admins = [];
         $adminUsernames = [];
         $adminIDs = subredditDA::get_subreddit_admins($subredditID);
+        // a list of users that can be added as an admin for a board
+        $availableUsers = [];
+        // get the admins from the DB based on their ID
         foreach ($adminIDs as $admin) {
             $currentAdmin = userDA::getUserByID($admin);
             array_push($admins, $currentAdmin);
             array_push($adminUsernames, $currentAdmin->getUsername());
+        }
+        // if the user is in the array of admins, do not add them
+        foreach ($users as $user) {
+            if (!in_array($user->getUsername(), $adminUsernames)) {
+                array_push($availableUsers, $user);
+            }
         }
         require 'views/subreddits/viewSubreddit.php';
         die();
@@ -146,11 +156,17 @@ switch ($action) {
         include('views/comments/createCommentForm.php');
         die();
         break;
-    case 'addAdminValidation':
+    case 'addAdmin':
         $adminIDToAdd = $_REQUEST['adminsList'];
         subredditDA::add_subreddit_admin($_SESSION['lastVisitedBoard'], $adminIDToAdd);
-        // require("models/subreddit/addAdminValidation.php");
         header("Location: subredditController.php?action=viewSubreddit&id=" . $_SESSION['lastVisitedBoard']);
+        die();
+        break;
+    case 'deleteAdmin':
+        $adminIDToDelete = $_REQUEST['adminsListDelete'];
+        subredditDA::delete_subreddit_admin($_SESSION['lastVisitedBoard'], $adminIDToDelete);
+        header("Location: subredditController.php?action=viewSubreddit&id=" . $_SESSION['lastVisitedBoard']);
+        echo 'DELETE THEM!';
         die();
         break;
     case 'deletePost':

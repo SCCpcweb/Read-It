@@ -21,18 +21,37 @@
                                     <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
                                 </li>
                             </ul>
+                            <!-- Add admin form -->
                             <form action="subredditController.php" method="POST" class="addAdminForm">
-                                <p class="addAdminForm-item">Add Admin:</p>
-                                <select name="adminsList" id="adminsList" class="addAdminForm-item addAdminForm-select">
-                                    <?php foreach ($users as $user) { ?>
-                                        <option value="<?php echo $user->getUserID(); ?>">
-                                            <?php echo htmlspecialchars($user->getUsername()); ?>
+                                <p class="addAdminForm-item">Add Admin:&nbsp;</p>
+                                <?php if (empty($availableUsers)) { ?>
+                                    <p class="addAdminForm-item">No users available to add</p>
+                                <?php } else { ?>
+                                    <select name="adminsList" id="adminsList" class="addAdminForm-item addAdminForm-select">
+                                        <?php foreach ($availableUsers as $user) { ?>
+                                            <option value="<?php echo $user->getUserID(); ?>">
+                                                <?php echo htmlspecialchars($user->getUsername()); ?>
+                                            </option>
+                                        <?php } ?>
+                                        <input type="hidden" value="addAdmin" name="action">
+                                        <input type="submit" value="Add Admin" class="addAdminForm-item">
+                                    </select>
+                                <?php } ?>
+                            </form>
+                            <!-- Delete admin form -->
+                            <form action="subredditController.php" method="POST" class="addAdminForm">
+                                <p class="addAdminForm-item">Delete Admin:&nbsp;</p>
+                                <select name="adminsListDelete" id="adminsList" class="addAdminForm-item addAdminForm-select">
+                                    <?php foreach ($admins as $admin) { ?>
+                                        <option value="<?php echo $admin->getUserID(); ?>">
+                                            <?php echo htmlspecialchars($admin->getUsername()); ?>
                                         </option>
                                     <?php } ?>
+                                    <input type="hidden" value="deleteAdmin" name="action">
+                                    <input type="submit" value="Delete Admin" class="addAdminForm-item">
                                 </select>
-                                <input type="hidden" value="addAdminValidation" name="action">
-                                <input type="submit" value="Add Admin" class="addAdminForm-item">
                             </form>
+                            <p>If you delete yourself you will no longer be able to edit this board.</p>
                         <?php } ?>
                     <?php } ?>
 
