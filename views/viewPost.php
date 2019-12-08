@@ -55,7 +55,11 @@ include_once("models/comment/Comment.php"); ?>
                     <?php //echo '<p>' . htmlspecialchars($comment->getSubredditID()) . '</p>'; 
                         ?>
                     <div class="comment-title">
-                        <p><?php echo htmlspecialchars(userDA::getUserByID($comment->getUserID())->getUsername()); ?></p>
+                        <form action="index.php">
+                            <input type="hidden" name="action" value="viewUser">
+                            <input type="hidden" name="userID" value="<?php echo htmlspecialchars($comment->getUserID()); ?>">
+                            <input type="submit" value="<?php echo htmlspecialchars(userDA::getUserByID($comment->getUserID())->getUsername()); ?>">
+                        </form>
                         <p><?php echo 'On: ' . htmlspecialchars($comment->getCommentTime()); ?></p>
                     </div>
 
@@ -73,4 +77,5 @@ include_once("models/comment/Comment.php"); ?>
             <?php endforeach ?>
 
         </div>
+        <span class="display-block"><?php include('views\components\usersSidebar.php'); ?></span>
 </body>

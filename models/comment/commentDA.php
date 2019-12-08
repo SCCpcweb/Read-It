@@ -45,4 +45,104 @@ class CommentDA
         $statement->closeCursor();
         return $comments;
     }
+
+    public static function like_comment($commentID)
+    {
+        $db = Database::getDB();
+
+        $likeComment = 'UPDATE comments
+                     SET rating = rating + 1
+                     WHERE commentID = :commentID';
+        $statement = $db->prepare($likeComment);
+        $statement->bindValue(':commentID', $commentID);
+        $statement->execute();
+    }
+
+    public static function dislike_comment($commentID)
+    {
+        $db = Database::getDB();
+
+        $dislikeComment = 'UPDATE comments
+                     SET rating = rating - 1
+                     WHERE commentID = :commentID';
+        $statement = $db->prepare($dislikeComment);
+        $statement->bindValue(':commentID', $commentID);
+        $statement->execute();
+    }
+
+    public static function add_to_comment_likes($commentID, $userID, $likeOrDislike)
+    {
+        $db = Database::getDB();
+
+        $query = 'INSERT INTO commentlikes(likeID, commentID, userID, likeOrDislike)
+                                VALUES(:likeID, :commentID, :userID, :likeOrDislike)';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':likeID', '');
+        $statement->bindValue(':commentID', $commentID);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':likeOrDislike', $likeOrDislike);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public static function update_comment_likes($commentID, $userID, $likeOrDislike)
+    {
+        $db = Database::getDB();
+
+        $query = 'UPDATE commentlikes
+                  set likeOrDislike = :likeOrDislike
+                  WHERE commentID = :commentID
+                  AND userID = :userID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':commentID', $commentID);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':likeOrDislike', $likeOrDislike);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public static function has_liked($commentID, $userID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT *
+                  FROM commentlikes
+                  WHERE userID = :userID
+                  AND commentID = :commentID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':commentID', $commentID);
+        $statement->execute();
+        $rows = $statement->fetch();
+        $statement->closeCursor();
+
+        if (empty($rows)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static function check_likes($commentID, $userID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT *
+                  FROM commentlikes
+                  WHERE userID = :userID
+                  AND commentID = :commentID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':commentID', $commentID);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $like = new PostLike($value['likeID'], $value['commentID'], $value['userID'], $value['likeOrDislike']);
+        }
+
+        $statement->closeCursor();
+
+        return $like;
+    }
 }

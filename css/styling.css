@@ -470,12 +470,18 @@ h3 {
 }
 
 .comment-vote-buttons {
-  display: block;
-  max-width: 105px;
+  display: flex;
   margin: 0;
   padding: 0;
-  display: inline-block;
   margin-left: 10px;
+
+  /* border: 1px solid blue; */
+}
+
+.comment-vote-buttons button {
+  border: none;
+  background-color: transparent;
+  padding: 2px;
 }
 
 .admins-list {
@@ -570,6 +576,19 @@ h3 {
   margin: 0;
   display: flex;
   justify-content: space-between;
+}
+
+.comment-title input[type=submit] {
+  border-radius: 0;
+  margin-top: 10px;
+  padding: 0;
+  background-color: transparent;
+  color: slateblue;
+}
+
+.comment-title input[type=submit]:hover {
+  color: dodgerblue;
+  text-decoration: underline;
 }
 
 .comment-content {
