@@ -157,7 +157,7 @@ h4 {
   border-radius: 6px;
   background-color: #eee;
   padding: 10px;
-  height: 100%;
+  min-height: 100%;
 }
 
 .container-sidebar ul {
@@ -201,7 +201,7 @@ h4 {
   border-radius: 8px;
   flex: 1;
   padding: 10px;
-  height: 100%;
+  min-height: 100%;
 }
 
 .container .link {
@@ -712,6 +712,12 @@ h3 {
 
 .display-block {
   display: block;
+}
+
+.btn-delete input[type="submit"] {
+  background-color: red;
+  color: white;
+  padding: 50px;
 }
 
 @media only screen and (max-width: 1200px) {

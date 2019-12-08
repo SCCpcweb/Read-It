@@ -20,6 +20,9 @@
                                 <li class="admins-list-item">
                                     <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
                                 </li>
+                                <li class="admins-list-item">
+                                    <a href="subredditController.php?action=deleteSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>" style="color: red"> Delete Board</a>
+                                </li>
                             </ul>
                             <!-- Add admin form -->
                             <form action="subredditController.php" method="POST" class="addAdminForm">
@@ -51,7 +54,7 @@
                                     <input type="submit" value="Delete Admin" class="addAdminForm-item">
                                 </select>
                             </form>
-                            <p>If you delete yourself you will no longer be able to edit this board.</p>
+                            <p class="error">If you delete yourself you will no longer be able to edit this board.</p>
                         <?php } ?>
                     <?php } ?>
 

@@ -79,6 +79,16 @@ switch ($action) {
         require("models/subreddit/editSubredditValidation.php");
         die();
         break;
+    case 'deleteSubreddit':
+        $subreddit = subredditDA::get_board($_REQUEST['subredditID']);
+        include("views/subreddits/deleteSubredditConfirm.php");
+        die();
+        break;
+    case 'deleteSubredditValidation':
+        subredditDA::delete_subreddit($_REQUEST['subredditID'], $_SESSION['user']->getUserID());
+        header("Location: index.php?action=home");
+        die();
+        break;
     case 'createPost':
         $subredditID = filter_input(INPUT_POST, 'subredditID');
         $subredditName = filter_input(INPUT_POST, 'subredditName');
@@ -166,7 +176,6 @@ switch ($action) {
         $adminIDToDelete = $_REQUEST['adminsListDelete'];
         subredditDA::delete_subreddit_admin($_SESSION['lastVisitedBoard'], $adminIDToDelete);
         header("Location: subredditController.php?action=viewSubreddit&id=" . $_SESSION['lastVisitedBoard']);
-        echo 'DELETE THEM!';
         die();
         break;
     case 'deletePost':

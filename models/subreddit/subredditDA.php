@@ -20,6 +20,22 @@ class subredditDA
         $statement->closeCursor();
     }
 
+    public static function delete_subreddit($subredditID, $adminID)
+    {
+        $db = Database::getDB();
+
+        $deleteSubreddit = 'DELETE subreddits
+                            FROM subreddits
+                            JOIN subredditadmins on subreddits.subredditID = subredditadmins.subredditID
+                            WHERE subreddits.subredditID = :subredditID
+                            AND subredditadmins.userID = :adminID';
+        $statement = $db->prepare($deleteSubreddit);
+        $statement->bindValue(':subredditID', $subredditID);
+        $statement->bindValue(':adminID', $adminID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
     // retrieves all subreddits from the DB
     public static function get_all()
     {
