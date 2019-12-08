@@ -7,19 +7,22 @@ require_once 'models/likes/postLike.php';
 
 class postDA
 {
-    public static function insert_post($postID, $subredditID, $userID, $postTitle, $postContent, $postTime)
+    public static function insert_post($subredditID, $userID, $postTitle, $postContent)
     {
         $db = Database::getDB();
+
+        date_default_timezone_set("America/Chicago");
+        $currentDatetime = date('Y/m/d h:i:s a', time());
 
         $query = 'INSERT INTO posts(postID, subredditID, userID, postTitle, postContent, postTime)
                                 VALUES(:postID, :subredditID, :userID, :postTitle, :postContent, :postTime)';
         $statement = $db->prepare($query);
-        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':postID', '');
         $statement->bindValue(':subredditID', $subredditID);
         $statement->bindValue(':userID', $userID);
         $statement->bindValue(':postTitle', $postTitle);
         $statement->bindValue(':postContent', $postContent);
-        $statement->bindValue(':postTime', $postTime);
+        $statement->bindValue(':postTime', $currentDatetime);
         $statement->execute();
         $statement->closeCursor();
     }
@@ -110,22 +113,20 @@ class postDA
     {
         $db = Database::getDB();
 
-        // potential delete query (kind of)
-        // - Select
-        // 'SELECT posts.postID, posts.subredditID, sa.userID as "Admin ID" from posts
-        // JOIN subredditAdmins sa on posts.userID = sa.userID'
+        // $deletePost = 'DELETE posts
+        //         FROM posts
+        //         JOIN posts on subreddits.subredditID = posts.subredditID
+        //         JOIN subreddits on subredditadmins.subredditID = subreddits.subredditID
+        //         WHERE posts.postID = :postID
+        //         AND (subredditAdmins.userid = :userID OR posts.userID = :userID)';
 
-        // - Delete
-        // DELETE p from posts p
-        // JOIN subredditAdmins sa on p.userid = sa.userid
-        // WHERE sa.userid = 1
-        // AND p.postID = 34;
+        $deletePost = 'DELETE posts
+                    FROM posts
+                    JOIN subreddits on posts.subredditID = subreddits.subredditID
+                    JOIN subredditadmins on subreddits.subredditID = subredditadmins.subredditID
+                    WHERE posts.postID = :postID
+                    AND (subredditAdmins.userid = :userID OR posts.userID = :userID)';
 
-        $deletePost = 'DELETE p
-                       from posts
-                       JOIN subredditAdmins sa on posts.userid = sa.userid
-                       WHERE sa.userid = :adminID
-                       AND p.postID = :postID';
         $statement = $db->prepare($deletePost);
         $statement->bindValue(':userID', $adminID);
         $statement->bindValue(':postID', $postID);

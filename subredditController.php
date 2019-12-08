@@ -185,7 +185,7 @@ switch ($action) {
         if ($post === 'No posts found') {
             header("Location: subredditController.php?action=viewSubreddit&id=" . $_SESSION['lastVisitedBoard']);
         } else {
-            postDA::delete_post($_REQUEST['postID'], $_SESSION['user']->getUserID());
+            postDA::delete_post_by_postID($_REQUEST['postID'], $_SESSION['user']->getUserID());
             header("Location: subredditController.php?action=viewSubreddit&id=" . $post->getSubredditID());
         }
         die();

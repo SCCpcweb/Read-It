@@ -739,6 +739,25 @@ h3 {
   padding: 50px;
 }
 
+.rating {
+  background-color: slateblue;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.rating:hover::after {
+  content: "Rating";
+  position: absolute;
+  background-color: black;
+  padding: 5px;
+  top: -35;
+  left: 0;
+  width: 55px;
+  height: 30px;
+}
+
 @media only screen and (max-width: 1200px) {
   .container {
     padding: 0;

@@ -44,16 +44,10 @@ include_once("models/comment/Comment.php"); ?>
                     </div>
                 </div>
             </div>
-            <!-- <?php var_dump($comments); ?> -->
+            <!-- A list of all user comments for this post -->
             <h3 style="margin-bottom: 10px">Comments: </h3>
             <?php foreach ($comments as $comment) : ?>
                 <div class="comment">
-                    <?php //echo '<p>' . htmlspecialchars($comment->getCommentID()) . '</p>'; 
-                        ?>
-                    <?php //echo '<p>' . htmlspecialchars($comment->getPostID()) . '</p>'; 
-                        ?>
-                    <?php //echo '<p>' . htmlspecialchars($comment->getSubredditID()) . '</p>'; 
-                        ?>
                     <div class="comment-title">
                         <form action="index.php">
                             <input type="hidden" name="action" value="viewUser">
@@ -66,16 +60,17 @@ include_once("models/comment/Comment.php"); ?>
                     <div class="comment-content">
                         <p><?php echo htmlspecialchars($comment->getCommentContent()); ?></p>
                         <div class="rating-section">
-                            <p><?php echo htmlspecialchars($comment->getRating()); ?></p>
+                            <p class="rating"><?php echo htmlspecialchars($comment->getRating()); ?></p>
                             <?php if (!empty($_SESSION['user'])) { ?>
                                 <?php include("views/components/commentVoteButton.php"); ?>
+                            <?php } ?>
+                            <?php if ($comment->getUserID() == $_SESSION['user']->getUserID()) { ?>
+                                <a href="#">DELETE WIP</a>
                             <?php } ?>
                         </div>
                     </div>
                 </div>
-
             <?php endforeach ?>
-
         </div>
         <span class="display-block"><?php include('views\components\usersSidebar.php'); ?></span>
 </body>

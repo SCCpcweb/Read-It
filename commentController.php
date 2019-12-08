@@ -67,4 +67,8 @@ switch ($action) {
         header('Location: subredditController.php?action=viewPost&postID=' . $_REQUEST['postID']);
         die();
         break;
+    case 'deleteComment':
+        echo 'delete comment ya';
+        die();
+        break;
 }
