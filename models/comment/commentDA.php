@@ -145,4 +145,21 @@ class CommentDA
 
         return $like;
     }
+
+    public static function delete_comment($commentID, $userID)
+    {
+        $db = Database::getDB();
+
+        $deleteComment = 'DELETE comments
+                    FROM comments
+                    JOIN subreddits on comments.subredditID = subreddits.subredditID
+                    JOIN subredditadmins on subreddits.subredditID = subredditadmins.subredditID
+                    WHERE comments.commentID = :commentID
+                    AND (subredditAdmins.userid = :userID OR comments.userID = :userID)';
+
+        $statement = $db->prepare($deleteComment);
+        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':commentID', $commentID);
+        $statement->execute();
+    }
 }

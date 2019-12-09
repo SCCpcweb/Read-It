@@ -64,8 +64,13 @@ include_once("models/comment/Comment.php"); ?>
                             <?php if (!empty($_SESSION['user'])) { ?>
                                 <?php include("views/components/commentVoteButton.php"); ?>
                             <?php } ?>
-                            <?php if ($comment->getUserID() == $_SESSION['user']->getUserID()) { ?>
-                                <a href="#">DELETE WIP</a>
+                            <?php if ($comment->getUserID() == $_SESSION['user']->getUserID() || in_array($_SESSION['user']->getUserID(), $adminIDs)) { ?>
+                                <form action="commentController.php">
+                                    <input type="hidden" name="action" value="deleteComment">
+                                    <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
+                                    <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
+                                    <input type="submit" class="btn-delete" value="Delete Comment"></input>
+                                </form>
                             <?php } ?>
                         </div>
                     </div>

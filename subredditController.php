@@ -100,6 +100,15 @@ switch ($action) {
         $post = postDA::get_post($postID);
         $subreddit = subredditDA::get_board($post->getSubredditID());
         $comments = commentDA::get_comments_by_postID($post->getPostID());
+        $adminIDs = subredditDA::get_subreddit_admins($_SESSION['lastVisitedBoard']);
+        $admins = [];
+        $adminUsernames = [];
+        // get the admins from the DB based on their ID
+        foreach ($adminIDs as $admin) {
+            $currentAdmin = userDA::getUserByID($admin);
+            array_push($admins, $currentAdmin);
+            array_push($adminUsernames, $currentAdmin->getUsername());
+        }
         include("views/viewPost.php");
         die();
         break;

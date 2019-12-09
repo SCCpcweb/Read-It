@@ -68,7 +68,8 @@ switch ($action) {
         die();
         break;
     case 'deleteComment':
-        echo 'delete comment ya';
+        CommentDA::delete_comment($_REQUEST['commentID'], $_SESSION['user']->getUserID());
+        header('Location: subredditController.php?action=viewPost&postID=' . $_REQUEST['postID']);
         die();
         break;
 }
