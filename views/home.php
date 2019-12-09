@@ -27,10 +27,6 @@
             </div>
         </div>
         <?php include('views\components\usersSidebar.php'); ?>
-        <!-- <div class="container-sidebar-right">
-            <p>Available Users:</p>
-            <p>Work in progress</p>
-        </div> -->
     </div>
 
     <?php include('views/components/footer.php'); ?>

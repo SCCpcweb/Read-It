@@ -45,10 +45,10 @@ class subredditDA
         $statement = $db->prepare($querySubreddits);
         $statement->execute();
         $rows = $statement->fetchAll();
-
+        $subreddits = [];
         foreach ($rows as $value) {
             $subreddit = new subreddit($value['subredditID'], $value['subredditName'], $value['subredditDescription']);
-            $subreddits[] = $subreddit;
+            array_push($subreddits, $subreddit);
         }
 
         $statement->closeCursor();
