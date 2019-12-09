@@ -37,7 +37,7 @@
             } ?>
           </div>
           <div class="input-section">
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" class="btn-submit">
             <input type="hidden" name="action" value="loginValidation">
           </div>
         </form>
@@ -74,7 +74,7 @@
             } ?>
           </div>
           <div class="input-section">
-            <input type="submit" value="Sign Up">
+            <input type="submit" value="Sign Up" class="btn-submit">
             <input type="hidden" name="action" value="registrationValidation">
           </div>
       </div>

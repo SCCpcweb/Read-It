@@ -32,7 +32,7 @@
                 </div>
                 <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($_REQUEST['subredditID']); ?>">
                 <input type="hidden" name="action" value="editSubredditValidation">
-                <input type="submit" value="Edit Board">
+                <input type="submit" value="Edit Board" class="btn-submit">
             </form>
         </div>
     </div>

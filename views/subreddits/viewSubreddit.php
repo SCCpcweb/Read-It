@@ -37,7 +37,7 @@
                                             </option>
                                         <?php } ?>
                                         <input type="hidden" value="addAdmin" name="action">
-                                        <input type="submit" value="Add Admin" class="addAdminForm-item">
+                                        <input type="submit" value="Add Admin" class="addAdminForm-item btn-submit">
                                     </select>
                                 <?php } ?>
                             </form>
@@ -51,7 +51,7 @@
                                         </option>
                                     <?php } ?>
                                     <input type="hidden" value="deleteAdmin" name="action">
-                                    <input type="submit" value="Delete Admin" class="addAdminForm-item">
+                                    <input type="submit" value="Delete Admin" class="addAdminForm-item btn-delete">
                                 </select>
                             </form>
                             <p class="error">If you delete yourself you will no longer be able to edit this board.</p>
@@ -74,7 +74,7 @@
                             <input type="hidden" name="action" value="createPost">
                             <input type="hidden" name="subredditName" value="<?php echo htmlspecialchars($subreddit->getSubredditName()); ?>">
                             <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($subreddit->getSubredditID()); ?>">
-                            <input type="submit" value="Create Your Own Post">
+                            <input type="submit" value="Create Your Own Post" class="btn-submit">
                         </form>
                     <?php } ?>
                 </div>
@@ -103,7 +103,7 @@
                                             <form action="subredditController.php" class="delete-link">
                                                 <input type="hidden" value="<?php echo htmlspecialchars($post->getPostID()); ?>" name="postID" />
                                                 <input type="hidden" value="deletePost" name="action" />
-                                                <input type="submit" value="Delete Post" />
+                                                <input type="submit" value="Delete Post" class="btn-delete" />
                                             </form>
                                         <?php } ?>
                                     <?php } ?>

@@ -34,7 +34,7 @@
                         </div>
                     <?php } ?>
                     <input type="hidden" value="commentValidation" name="action">
-                    <input type="submit" value="Leave a Comment" id="createComment">
+                    <input type="submit" value="Leave a Comment" id="createComment" class="btn-submit">
                 </form>
             </div>
         </div>

@@ -31,7 +31,7 @@
                     <p class="greyCard"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                 </div>
                 <input type="hidden" name="action" value="createSubreddit">
-                <input type="submit" value="Create Board">
+                <input type="submit" value="Create Board" class="btn-submit">
             </form>
         </div>
     </div>

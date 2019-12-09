@@ -35,7 +35,7 @@ if (empty($subredditName)) {
                     </div>
                 <?php } ?>
                 <input type="hidden" value="postValidation" name="action">
-                <input type="submit" value="Create Post" id="createPost">
+                <input type="submit" value="Create Post" id="createPost" class="btn-submit">
             </form>
 
         </div>

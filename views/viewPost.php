@@ -27,18 +27,18 @@ include_once("models/comment/Comment.php"); ?>
                                 <form action="subredditController.php" method="POST">
                                     <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                                     <input type="hidden" name="action" value="editPost">
-                                    <input type="submit" value="Edit Post">
+                                    <input type="submit" value="Edit Post" class="link-edit">
                                 </form>
                                 <form action="subredditController.php" method="POST">
                                     <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                                     <input type="hidden" name="action" value="deletePost">
-                                    <input type="submit" value="Delete">
+                                    <input type="submit" value="Delete" class="link-delete">
                                 </form>
                             <?php } ?>
                             <form action="subredditController.php" method="POST">
                                 <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                                 <input type="hidden" name="action" value="commentForm">
-                                <input type="submit" value="Add Comment">
+                                <input type="submit" value="Add Comment" class="link-edit">
                             </form>
                         <?php } ?>
                     </div>
@@ -52,7 +52,7 @@ include_once("models/comment/Comment.php"); ?>
                         <form action="index.php">
                             <input type="hidden" name="action" value="viewUser">
                             <input type="hidden" name="userID" value="<?php echo htmlspecialchars($comment->getUserID()); ?>">
-                            <input type="submit" value="<?php echo htmlspecialchars(userDA::getUserByID($comment->getUserID())->getUsername()); ?>">
+                            <input type="submit" value="<?php echo htmlspecialchars(userDA::getUserByID($comment->getUserID())->getUsername()); ?>" class="link-edit">
                         </form>
                         <p><?php echo 'On: ' . htmlspecialchars($comment->getCommentTime()); ?></p>
                     </div>
@@ -69,7 +69,13 @@ include_once("models/comment/Comment.php"); ?>
                                     <input type="hidden" name="action" value="deleteComment">
                                     <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
                                     <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
-                                    <input type="submit" class="btn-delete" value="Delete Comment"></input>
+                                    <input type="submit" class="link-delete" value="Delete Comment"></input>
+                                </form>
+                                <form action="commentController.php">
+                                    <input type="hidden" name="action" value="editComment">
+                                    <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
+                                    <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
+                                    <input type="submit" class="link-edit" value="Edit Comment"></input>
                                 </form>
                             <?php } ?>
                         </div>

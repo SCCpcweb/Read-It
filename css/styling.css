@@ -53,6 +53,10 @@ input[type="text"] {
 }
 
 input[type="submit"] {
+  cursor: pointer;
+}
+
+.btn-submit {
   padding: 10px;
   border-radius: 8px;
   background-color: slateblue;
@@ -63,7 +67,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
+.btn-submit:hover {
   background-color: dodgerblue;
 }
 
@@ -733,10 +737,46 @@ h3 {
   display: block;
 }
 
-.btn-delete input[type="submit"] {
+.btn-delete {
+  border: none;
+  border-radius: 6px;
   background-color: red;
   color: white;
-  padding: 50px;
+  padding: 10px;
+  transition: background-color 200ms;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-delete:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.link-delete {
+  color: red;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+  /* background-color: transparent; */
+}
+
+.link-delete:hover {
+  color: dodgerblue;
+  text-decoration: underline;
+}
+
+.link-edit {
+  color: slateblue;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.link-edit:hover {
+  text-decoration: underline;
+  color: dodgerblue;
 }
 
 .rating {

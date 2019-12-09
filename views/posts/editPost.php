@@ -18,7 +18,7 @@ include_once("views/components/header.php"); ?>
                             <input type="hidden" name="subredditID" value="<?php echo htmlspecialchars($post->getSubredditID()); ?>">
                             <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
                             <input type="hidden" name="action" value="submitEdit">
-                            <input type="submit" value="Submit Edit">
+                            <input type="submit" value="Submit Edit" class="btn-submit">
                         <?php } ?>
                     </form>
                 </div>
