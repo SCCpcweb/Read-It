@@ -96,10 +96,14 @@ switch ($action) {
         die();
         break;
     case 'viewPost':
+
         $postID = filter_input(INPUT_GET, 'postID');
         $post = postDA::get_post($postID);
         $subreddit = subredditDA::get_board($post->getSubredditID());
         $comments = commentDA::get_comments_by_postID($post->getPostID());
+        if (empty($_SESSION['lastVisitedBoard'])) {
+            $_SESSION['lastVisitedBoard'] = $subreddit->getSubredditID();
+        }
         $adminIDs = subredditDA::get_subreddit_admins($_SESSION['lastVisitedBoard']);
         $admins = [];
         $adminUsernames = [];
