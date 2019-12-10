@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2019 at 09:22 PM
--- Server version: 10.3.15-MariaDB
--- PHP Version: 7.3.6
+-- Generation Time: Dec 10, 2019 at 02:06 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,6 +37,14 @@ CREATE TABLE `commentlikes` (
   `likeOrDislike` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `commentlikes`
+--
+
+INSERT INTO `commentlikes` (`likeID`, `commentID`, `userID`, `likeOrDislike`) VALUES
+(1, 2, 38, 'dislike'),
+(2, 1, 38, 'like');
+
 -- --------------------------------------------------------
 
 --
@@ -49,8 +57,8 @@ CREATE TABLE `comments` (
   `postID` int(11) NOT NULL,
   `subredditID` int(11) NOT NULL,
   `commentContent` varchar(500) NOT NULL,
-  `commentTime` timestamp NOT NULL DEFAULT current_timestamp(),
-  `rating` int(11) NOT NULL DEFAULT 0
+  `commentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `rating` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -58,7 +66,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`commentID`, `userID`, `postID`, `subredditID`, `commentContent`, `commentTime`, `rating`) VALUES
-(10, 36, 35, 17, 'Here\'s a comment', '2019-11-26 18:49:00', 0);
+(1, 38, 1, 29, 'I commented on it too', '2019-12-09 12:41:31', 1),
+(2, 38, 1, 29, 'NO', '2019-12-09 12:42:02', -1);
 
 -- --------------------------------------------------------
 
@@ -73,6 +82,13 @@ CREATE TABLE `postlikes` (
   `likeOrDislike` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `postlikes`
+--
+
+INSERT INTO `postlikes` (`likeID`, `postID`, `userID`, `likeOrDislike`) VALUES
+(1, 1, 38, 'like');
+
 -- --------------------------------------------------------
 
 --
@@ -85,8 +101,8 @@ CREATE TABLE `posts` (
   `userID` int(11) NOT NULL,
   `postTitle` varchar(64) NOT NULL,
   `postContent` varchar(1500) NOT NULL,
-  `postTime` datetime NOT NULL DEFAULT current_timestamp(),
-  `rating` int(11) NOT NULL DEFAULT 0
+  `postTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `rating` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -94,8 +110,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`postID`, `subredditID`, `userID`, `postTitle`, `postContent`, `postTime`, `rating`) VALUES
-(35, 17, 36, 'Post title', 'Yee', '2019-11-26 12:49:09', 0),
-(36, 17, 29, 'Shookstra psot', 'test post for deleting posts', '2019-11-26 02:17:50', 0);
+(1, 29, 38, 'Here is my first post', 'hello again', '2019-12-09 18:44:57', 1);
 
 -- --------------------------------------------------------
 
@@ -113,10 +128,9 @@ CREATE TABLE `subredditadmins` (
 --
 
 INSERT INTO `subredditadmins` (`subredditID`, `userID`) VALUES
-(17, 29),
-(17, 36),
-(18, 29),
-(19, 29);
+(27, 29),
+(28, 29),
+(29, 38);
 
 -- --------------------------------------------------------
 
@@ -135,12 +149,9 @@ CREATE TABLE `subreddits` (
 --
 
 INSERT INTO `subreddits` (`subredditID`, `subredditName`, `subredditDescription`) VALUES
-(1, 'home', 'This is the home board'),
-(3, 'science', 'All things science. Come to this board to discuss the latest breakthroughs in science.'),
-(4, 'Announcements', 'Here is where you\'ll find all announcements related to read-it. Could also answer FAQs, unveil new features, or announce upcoming changes.'),
-(17, 'testing board for admins', 'hallo'),
-(18, 'shookstra\'s board', 'yesssss'),
-(19, 'another board yeet', 'oh babay');
+(27, 'Home', 'This is the home board where everyone should start.'),
+(28, 'Science', 'A board for all things science.'),
+(29, 'TestUser\'s Board', 'My board 1');
 
 -- --------------------------------------------------------
 
@@ -162,8 +173,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userID`, `username`, `email`, `password`) VALUES
 (29, 'shookstra', 'sam@gmail.com', '$2y$11$gLlBhWcpUJgbuvmLwOtCluWEEv08Pd30tzJCVAXUEMDblzoYp.ZB2'),
 (36, 'Sam1', 'sam1@gmail.com', '$2y$11$dwEEypwYinaL8oc0W7sTn.L4m.ITDOITuwKd60gae2ZvUN905G1sC'),
-(37, 'TestUser', 'testEmail@gmail.com', '$2y$11$9fC9pJxpa6siq9bytGxvMu4FiILQowsYFj8Brh3mx4RhvI2ewk4lu'),
-(38, 'TestUser2', 'testEmail2@gmail.com', '$2y$11$rR3maBtGJBJtliqI2j8HQe8Eum..l7sk5pMdTOGPzkH8Sfq43CR3C');
+(38, 'TestUser', 'test@gmail.com', '$2y$11$pMSrhYNOQWDkfzediskDdew.GWF4cBEJ5omCUyaBckQhiNkVWAVzO');
 
 --
 -- Indexes for dumped tables
@@ -173,7 +183,8 @@ INSERT INTO `users` (`userID`, `username`, `email`, `password`) VALUES
 -- Indexes for table `commentlikes`
 --
 ALTER TABLE `commentlikes`
-  ADD PRIMARY KEY (`likeID`);
+  ADD PRIMARY KEY (`likeID`),
+  ADD KEY `commentID` (`commentID`);
 
 --
 -- Indexes for table `comments`
@@ -197,8 +208,8 @@ ALTER TABLE `postlikes`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`postID`),
-  ADD KEY `subredditID` (`subredditID`),
-  ADD KEY `userID` (`userID`) USING BTREE;
+  ADD KEY `userID` (`userID`) USING BTREE,
+  ADD KEY `subredditID` (`subredditID`);
 
 --
 -- Indexes for table `subredditadmins`
@@ -227,31 +238,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `commentlikes`
 --
 ALTER TABLE `commentlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `postlikes`
 --
 ALTER TABLE `postlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subreddits`
 --
 ALTER TABLE `subreddits`
-  MODIFY `subredditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `subredditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -264,19 +275,31 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `commentlikes`
+--
+ALTER TABLE `commentlikes`
+  ADD CONSTRAINT `fk_commentID_comments(commentID)` FOREIGN KEY (`commentID`) REFERENCES `comments` (`commentID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `fk_comments_postID` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_comments_subredditID` FOREIGN KEY (`subredditID`) REFERENCES `subreddits` (`subredditID`),
+  ADD CONSTRAINT `fk_comments_subredditID` FOREIGN KEY (`subredditID`) REFERENCES `subreddits` (`subredditID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_comments_userID` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `postlikes`
 --
 ALTER TABLE `postlikes`
-  ADD CONSTRAINT `fk_postID_posts` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`),
-  ADD CONSTRAINT `fk_userID_users` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+  ADD CONSTRAINT `fk_postID_posts` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_userID_users` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `fk_subreddits(subredditid)_posts(subredditID)` FOREIGN KEY (`subredditID`) REFERENCES `subreddits` (`subredditID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `subredditadmins`
