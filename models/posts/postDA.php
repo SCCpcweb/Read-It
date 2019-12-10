@@ -172,6 +172,19 @@ class postDA
         $statement->closeCursor();
     }
 
+    public static function update_post($postID, $postContent)
+    {
+        $db = Database::getDB();
+
+        $updatePost = 'UPDATE posts SET postContent = :postContent, postTime = NOW() WHERE postID LIKE :postID';
+        $statement = $db->prepare($updatePost);
+        $statement->bindValue(':postID', $postID);
+        $statement->bindValue(':postContent', $postContent);
+        // $statement->bindValue(':postTime', $currentDatetime);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
     public static function update_post_likes($postID, $userID, $likeOrDislike)
     {
         $db = Database::getDB();

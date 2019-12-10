@@ -6,7 +6,7 @@
 <body>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
-        <?php include("views/components/boardSidebar.php"); ?>
+        <div class="display-block"><?php include("views/components/boardSidebar.php"); ?></div>
         <div class="container-main">
             <h2>
                 <div class="title-card">Home Page</div>
@@ -26,7 +26,7 @@
                 </p>
             </div>
         </div>
-        <?php include('views\components\usersSidebar.php'); ?>
+        <div class="display-block"><?php include('views\components\usersSidebar.php'); ?></div>
     </div>
 
     <?php include('views/components/footer.php'); ?>

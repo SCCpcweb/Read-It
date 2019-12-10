@@ -13,51 +13,6 @@
                     <h1><?php echo htmlspecialchars($subreddit->getSubredditName()); ?></h1>
                     <p><?php echo htmlspecialchars($subreddit->getSubredditDescription()); ?></p>
                     <p><?php echo htmlspecialchars('Subreddit ID: ' . $subreddit->getSubredditID()); ?></p>
-                    <?php if (!empty($_SESSION['user'])) { ?>
-                        <?php if (in_array($_SESSION['user']->getUserName(), $adminUsernames)) { ?>
-                            <ul class="admins-list">
-                                <li class="admins-list-item">Admin Actions: </li>
-                                <li class="admins-list-item">
-                                    <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
-                                </li>
-                                <li class="admins-list-item">
-                                    <a href="subredditController.php?action=deleteSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>" style="color: red"> Delete Board</a>
-                                </li>
-                            </ul>
-                            <!-- Add admin form -->
-                            <form action="subredditController.php" method="POST" class="addAdminForm">
-                                <p class="addAdminForm-item">Add Admin:&nbsp;</p>
-                                <?php if (empty($availableUsers)) { ?>
-                                    <p class="addAdminForm-item">No users available to add</p>
-                                <?php } else { ?>
-                                    <select name="adminsList" id="adminsList" class="addAdminForm-item addAdminForm-select">
-                                        <?php foreach ($availableUsers as $user) { ?>
-                                            <option value="<?php echo $user->getUserID(); ?>">
-                                                <?php echo htmlspecialchars($user->getUsername()); ?>
-                                            </option>
-                                        <?php } ?>
-                                        <input type="hidden" value="addAdmin" name="action">
-                                        <input type="submit" value="Add Admin" class="addAdminForm-item btn-submit">
-                                    </select>
-                                <?php } ?>
-                            </form>
-                            <!-- Delete admin form -->
-                            <form action="subredditController.php" method="POST" class="addAdminForm">
-                                <p class="addAdminForm-item">Delete Admin:&nbsp;</p>
-                                <select name="adminsListDelete" id="adminsList" class="addAdminForm-item addAdminForm-select">
-                                    <?php foreach ($admins as $admin) { ?>
-                                        <option value="<?php echo $admin->getUserID(); ?>">
-                                            <?php echo htmlspecialchars($admin->getUsername()); ?>
-                                        </option>
-                                    <?php } ?>
-                                    <input type="hidden" value="deleteAdmin" name="action">
-                                    <input type="submit" value="Delete Admin" class="addAdminForm-item btn-delete">
-                                </select>
-                            </form>
-                            <p class="error">If you delete yourself you will no longer be able to edit this board.</p>
-                        <?php } ?>
-                    <?php } ?>
-
                     <ul class="admins-list">
                         <li class="admins-list-item">Board Admins: </li>
                         <?php foreach ($admins as $admin) : ?>
@@ -68,6 +23,56 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
+                    <?php if (!empty($_SESSION['user'])) { ?>
+                        <?php if (in_array($_SESSION['user']->getUserName(), $adminUsernames)) { ?>
+                            <button class="admin-tools-button" id="admin-tools-button" onClick="toggleAdminSection()">
+                                Toggle Admin Tools
+                                <i class="fas fa-caret-down" id="arrow"></i>
+                            </button>
+                            <div class="admin-section" id="admin-section">
+                                <!-- Add admin form -->
+                                <form action="subredditController.php" method="POST" class="addAdminForm">
+                                    <p class="addAdminForm-item">Add Admin:&nbsp;</p>
+                                    <?php if (empty($availableUsers)) { ?>
+                                        <p class="addAdminForm-item">No users available to add</p>
+                                    <?php } else { ?>
+                                        <select name="adminsList" id="adminsList" class="addAdminForm-item addAdminForm-select">
+                                            <?php foreach ($availableUsers as $user) { ?>
+                                                <option value="<?php echo $user->getUserID(); ?>">
+                                                    <?php echo htmlspecialchars($user->getUsername()); ?>
+                                                </option>
+                                            <?php } ?>
+                                            <input type="hidden" value="addAdmin" name="action">
+                                            <input type="submit" value="Add Admin" class="addAdminForm-item btn-submit">
+                                        </select>
+                                    <?php } ?>
+                                </form>
+                                <!-- Delete admin form -->
+                                <form action="subredditController.php" method="POST" class="addAdminForm">
+                                    <p class="addAdminForm-item">Delete Admin:&nbsp;</p>
+                                    <select name="adminsListDelete" id="adminsList" class="addAdminForm-item addAdminForm-select">
+                                        <?php foreach ($admins as $admin) { ?>
+                                            <option value="<?php echo $admin->getUserID(); ?>">
+                                                <?php echo htmlspecialchars($admin->getUsername()); ?>
+                                            </option>
+                                        <?php } ?>
+                                        <input type="hidden" value="deleteAdmin" name="action">
+                                        <input type="submit" value="Delete Admin" class="addAdminForm-item btn-delete">
+                                    </select>
+                                </form>
+                                <ul class="admins-list">
+                                    <li class="admins-list-item">Admin Actions: </li>
+                                    <li class="admins-list-item">
+                                        <a href="subredditController.php?action=editSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>"> Edit Board</a>
+                                    </li>
+                                    <li class="admins-list-item">
+                                        <a href="subredditController.php?action=deleteSubreddit&subredditID=<?php echo $subreddit->getSubredditID(); ?>" style="color: red"> Delete Board</a>
+                                    </li>
+                                </ul>
+                                <p class="error">If you delete yourself you will no longer be able to edit this board.</p>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
 
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <form action="subredditController.php" method="POST">
@@ -122,3 +127,5 @@
 </body>
 
 </html>
+
+<script src="scripts/showBoards.js"></script>

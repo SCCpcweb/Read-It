@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once("views/components/header.php");
-$user1 = $user; ?>
+<?php include_once("views/components/header.php"); ?>
 
 <body>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
         <div class="container-main">
-            <?php echo '<h2>' . htmlspecialchars($user->getUsername()) . '\'s Profile</h1>'; ?>
+            <?php echo '<h2>' . htmlspecialchars($userToView->getUsername()) . '\'s Profile</h1>'; ?>
             <?php if (empty($posts)) { ?>
                 <h3>This user has not made any posts yet.</h3>
             <?php } else { ?>

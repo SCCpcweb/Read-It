@@ -18,7 +18,10 @@ if ($action === null) {
     }
 }
 
+// all users
 $_SESSION['users'] = userDA::get_all();
+// all subreddits
+$subreddits = subredditDA::get_all();
 
 switch ($action) {
     case 'home':
@@ -58,8 +61,8 @@ switch ($action) {
         die();
         break;
     case 'viewUser':
-        $user = userDA::getUserByID($_GET['userID']);
-        $posts = postDA::get_post_by_userID($user->getUserID());
+        $userToView = userDA::getUserByID($_GET['userID']);
+        $posts = postDA::get_post_by_userID($userToView->getUserID());
         include('views/viewUser.php');
         die();
         break;

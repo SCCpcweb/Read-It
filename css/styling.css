@@ -332,6 +332,7 @@ h4 {
     4px 4px 10px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   transition: box-shadow 350ms;
+  width: 100%;
 }
 
 .post:hover {
@@ -351,6 +352,7 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 }
 
 .post-content p,
@@ -407,6 +409,14 @@ h3 {
   border-radius: 20%;
   transition: color 600ms, background-color 300ms, border-radius 600ms;
   position: relative;
+}
+
+.fa-caret-down {
+  color: slateblue;
+  font-size: 48px;
+  padding: 0;
+  margin: 0;
+  transition: all 200ms;
 }
 
 .like:hover,
@@ -695,12 +705,17 @@ h3 {
 }
 
 .addAdminForm {
+  display: flex;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 5px;
+  justify-content: space-between;
+  width: 365px;
+
+  /* border: 3px solid red; */
 }
 
 .addAdminForm-item {
@@ -798,15 +813,41 @@ h3 {
   height: 30px;
 }
 
+.admin-section {
+  display: none;
+  border-radius: 6px;
+  background-color: #eee;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+
+.admin-tools-button {
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #eee;
+  padding: 0px 10px;
+  width: 200px;
+  border-radius: 6px;
+  font-size: 16px;
+  float: right;
+}
+
 @media only screen and (max-width: 1200px) {
+  /* * {
+    border: 1px solid green;
+  } */
+
   .container {
     padding: 0;
-    /* margin: 0 auto; */
   }
 
   .container-main {
-    /* border: 1px solid red; */
-    margin: 0 5px;
+    flex: 1;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .subredditForm {
@@ -820,6 +861,10 @@ h3 {
 
   .board-info {
     margin: 0 0 10px 0;
+  }
+
+  .boards {
+    color: black;
   }
 
   .form-creation-tool {
@@ -889,5 +934,21 @@ h3 {
 
   .display-block {
     display: none;
+  }
+
+  .post-content {
+    width: 100%;
+  }
+
+  .post {
+    width: 100%;
+  }
+
+  .post-links {
+    width: 100%;
+  }
+
+  .error {
+    padding: 10px;
   }
 }

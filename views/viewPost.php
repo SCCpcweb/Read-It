@@ -6,7 +6,7 @@ include_once("models/comment/Comment.php"); ?>
 <body>
     <?php include_once("views/components/nav.php"); ?>
     <div class="container">
-        <?php include("views/components/boardSidebar.php"); ?>
+        <div class="display-block"><?php include("views/components/boardSidebar.php"); ?></div>
         <div class="container-main">
             <h1><?php echo htmlspecialchars($subreddit->getSubredditName()); ?></h1>
             <div class="post" style="margin-bottom: 30px">
@@ -75,7 +75,7 @@ include_once("models/comment/Comment.php"); ?>
                                     <input type="hidden" name="action" value="editComment">
                                     <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
                                     <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
-                                    <input type="submit" class="link-edit" value="Edit Comment"></input>
+                                    <input type="submit" class="link-edit" value="Edit Comment (WIP)"></input>
                                 </form>
                             <?php } ?>
                         </div>
