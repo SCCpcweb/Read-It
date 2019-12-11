@@ -26,11 +26,51 @@ class CommentDA
         $statement->closeCursor();
     }
 
-    public static function get_comments_by_postID($postID)
+    public static function get_comments_by_postID_asc($postID)
     {
         $db = Database::getDB();
 
-        $query = 'SELECT * FROM comments WHERE postID LIKE :postID';
+        $query = 'SELECT * FROM comments WHERE postID LIKE :postID ORDER BY rating ASC';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $comments = [];
+
+        foreach ($rows as $value) {
+            $comment = new Comment($value['commentID'], $value['userID'], $value['postID'], $value['subredditID'], $value['commentContent'], $value['commentTime'], $value['rating']);
+            array_push($comments, $comment);
+        }
+
+        $statement->closeCursor();
+        return $comments;
+    }
+
+    public static function get_comments_by_postID_desc($postID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT * FROM comments WHERE postID LIKE :postID ORDER BY rating DESC';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':postID', $postID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $comments = [];
+
+        foreach ($rows as $value) {
+            $comment = new Comment($value['commentID'], $value['userID'], $value['postID'], $value['subredditID'], $value['commentContent'], $value['commentTime'], $value['rating']);
+            array_push($comments, $comment);
+        }
+
+        $statement->closeCursor();
+        return $comments;
+    }
+
+    public static function get_comments_by_postID_recent($postID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT * FROM comments WHERE postID LIKE :postID ORDER BY commentTime DESC';
         $statement = $db->prepare($query);
         $statement->bindValue(':postID', $postID);
         $statement->execute();

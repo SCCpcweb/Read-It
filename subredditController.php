@@ -33,6 +33,13 @@ switch ($action) {
         $users = userDA::get_all();
         $subredditID = filter_input(INPUT_GET, 'id');
         $subreddit = subredditDA::get_board($subredditID);
+
+        // if the user were to input a subredditID that doesn't exist
+        if ($subreddit == "none") {
+            header("Location: index.php?action=home");
+            break;
+            die();
+        }
         $posts = postDA::get_posts_for_subreddit($subredditID);
         $_SESSION['lastVisitedBoard'] = $subredditID;
         $admins = [];
@@ -96,11 +103,29 @@ switch ($action) {
         die();
         break;
     case 'viewPost':
-
-        $postID = filter_input(INPUT_GET, 'postID');
-        $post = postDA::get_post($postID);
+        $post = postDA::get_post($_REQUEST['postID']);
         $subreddit = subredditDA::get_board($post->getSubredditID());
-        $comments = commentDA::get_comments_by_postID($post->getPostID());
+        // get sort order from the request
+        // if there is no sortOrder it will default to best
+        $sortOrder = "";
+        if (empty($_REQUEST['sortOrder'])) {
+            $sortOrder = "Best";
+        } else {
+            $sortOrder = $_REQUEST['sortOrder'];
+        }
+
+        // if the user changed the select, it will default to best
+        if ($sortOrder == "Best") {
+            $comments = commentDA::get_comments_by_postID_desc($post->getPostID());
+        } else if ($sortOrder == "Worst") {
+            $comments = commentDA::get_comments_by_postID_asc($post->getPostID());
+        } else if ($sortOrder == "Latest") {
+            $comments = commentDA::get_comments_by_postID_recent($post->getPostID());
+        } else {
+            $sortOrder = "Best";
+            $comments = commentDA::get_comments_by_postID_desc($post->getPostID());
+        }
+
         if (empty($_SESSION['lastVisitedBoard'])) {
             $_SESSION['lastVisitedBoard'] = $subreddit->getSubredditID();
         }

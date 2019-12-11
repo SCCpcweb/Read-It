@@ -834,6 +834,56 @@ h3 {
   float: right;
 }
 
+/* Comment sorting on view post page */
+.sort-form {
+  display: flex;
+  border: 1px solid #ccc;
+  width: 200px;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.sort-form-select {
+  flex: 2;
+}
+
+.sort-form-item {
+  flex: 1;
+}
+
+.sort-form-button {
+  color: slateblue;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  font-size: 16px;
+  margin-left: 3px;
+  border-radius: 6px;
+  transition: background-color 200ms;
+}
+
+.sort-form-button:hover {
+  background-color: #eee;
+}
+
+.sort-order-type {
+  text-align: center;
+  padding: 10px;
+  width: 180px;
+  background-color: slateblue;
+  color: white;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.sorting-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* MEDIA QUERIES */
 @media only screen and (max-width: 1200px) {
   /* * {
     border: 1px solid green;

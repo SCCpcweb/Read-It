@@ -71,7 +71,11 @@ class subredditDA
         }
 
         $statement->closeCursor();
-        return $subreddit;
+        if (empty($rows)) {
+            return "none";
+        } else {
+            return $subreddit;
+        }
     }
 
     // updates a board's information fields

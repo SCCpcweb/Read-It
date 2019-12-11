@@ -44,8 +44,25 @@ include_once("models/comment/Comment.php"); ?>
                     </div>
                 </div>
             </div>
-            <!-- A list of all user comments for this post -->
+            <!-- form to sort comments by their rating -->
             <h3 style="margin-bottom: 10px">Comments: </h3>
+            <div class="sorting-container">
+                <form class="sort-form" method="POST" action="subredditController.php">
+                    <select class="sort-form-select" name="sortOrder">
+                        <option value="Worst">Worst</option>
+                        <option value="Best">Best</option>
+                        <option value="Latest">Most Recent</option>
+                    </select>
+                    <input type="hidden" name="postID" value="<?php echo htmlspecialchars($post->getPostID()); ?>">
+                    <input type="hidden" name="action" value="viewPost">
+                    <input type="submit" value="Sort" class="sort-form-item sort-form-button">
+                </form>
+                <p class="sort-order-type">Sorting By: <?php echo htmlspecialchars($sortOrder); ?></p>
+            </div>
+            <?php if (empty($comments)) { ?>
+                <h3>Be the first to comment!</h3>
+            <?php } ?>
+            <!-- A list of all user comments for this post -->
             <?php foreach ($comments as $comment) : ?>
                 <div class="comment">
                     <div class="comment-title">
@@ -64,19 +81,21 @@ include_once("models/comment/Comment.php"); ?>
                             <?php if (!empty($_SESSION['user'])) { ?>
                                 <?php include("views/components/commentVoteButton.php"); ?>
                             <?php } ?>
-                            <?php if ($comment->getUserID() == $_SESSION['user']->getUserID() || in_array($_SESSION['user']->getUserID(), $adminIDs)) { ?>
-                                <form action="commentController.php">
-                                    <input type="hidden" name="action" value="deleteComment">
-                                    <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
-                                    <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
-                                    <input type="submit" class="link-delete" value="Delete Comment"></input>
-                                </form>
-                                <form action="commentController.php">
-                                    <input type="hidden" name="action" value="editComment">
-                                    <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
-                                    <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
-                                    <input type="submit" class="link-edit" value="Edit Comment (WIP)"></input>
-                                </form>
+                            <?php if (!empty($_SESSION['user'])) { ?>
+                                <?php if ($comment->getUserID() == $_SESSION['user']->getUserID() || in_array($_SESSION['user']->getUserID(), $adminIDs)) { ?>
+                                    <form action="commentController.php">
+                                        <input type="hidden" name="action" value="deleteComment">
+                                        <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
+                                        <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
+                                        <input type="submit" class="link-delete" value="Delete Comment"></input>
+                                    </form>
+                                    <form action="commentController.php">
+                                        <input type="hidden" name="action" value="editComment">
+                                        <input type="hidden" name="postID" value="<?php echo htmlspecialchars($comment->getPostID()); ?>">
+                                        <input type="hidden" name="commentID" value="<?php echo htmlspecialchars($comment->getCommentID()) ?>">
+                                        <input type="submit" class="link-edit" value="Edit Comment (WIP)"></input>
+                                    </form>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                     </div>
