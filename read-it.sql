@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2019 at 02:06 AM
+-- Generation Time: Dec 11, 2019 at 02:42 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -43,7 +43,16 @@ CREATE TABLE `commentlikes` (
 
 INSERT INTO `commentlikes` (`likeID`, `commentID`, `userID`, `likeOrDislike`) VALUES
 (1, 2, 38, 'dislike'),
-(2, 1, 38, 'like');
+(2, 1, 38, 'like'),
+(4, 5, 29, 'like'),
+(5, 2, 29, 'dislike'),
+(6, 1, 29, 'like'),
+(9, 2, 36, 'dislike'),
+(10, 12, 39, 'like'),
+(11, 13, 39, 'dislike'),
+(13, 1, 40, 'like'),
+(14, 2, 40, 'dislike'),
+(16, 13, 38, 'dislike');
 
 -- --------------------------------------------------------
 
@@ -66,8 +75,11 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`commentID`, `userID`, `postID`, `subredditID`, `commentContent`, `commentTime`, `rating`) VALUES
-(1, 38, 1, 29, 'I commented on it too', '2019-12-09 12:41:31', 1),
-(2, 38, 1, 29, 'NO', '2019-12-09 12:42:02', -1);
+(1, 38, 1, 29, 'I commented on it too', '2019-12-09 12:41:31', 3),
+(2, 38, 1, 29, 'NO', '2019-12-09 12:42:02', -3),
+(5, 29, 1, 29, 'hallo', '2019-12-10 11:17:40', 1),
+(12, 39, 5, 29, 'I like to comment on my own posts', '2019-12-10 13:16:35', 1),
+(13, 39, 5, 29, 'another comment', '2019-12-10 13:17:00', -2);
 
 -- --------------------------------------------------------
 
@@ -110,7 +122,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`postID`, `subredditID`, `userID`, `postTitle`, `postContent`, `postTime`, `rating`) VALUES
-(1, 29, 38, 'Here is my first post', 'hello again', '2019-12-09 18:44:57', 1);
+(1, 29, 38, 'Here is my first post', 'hello again', '2019-12-09 18:44:57', 2),
+(5, 29, 39, 'Hello everyone', 'What is everyone up to?', '2019-12-10 07:16:19', 0),
+(11, 28, 40, 'science....', 'it aint real :0', '2019-12-10 07:26:52', -1);
 
 -- --------------------------------------------------------
 
@@ -173,7 +187,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userID`, `username`, `email`, `password`) VALUES
 (29, 'shookstra', 'sam@gmail.com', '$2y$11$gLlBhWcpUJgbuvmLwOtCluWEEv08Pd30tzJCVAXUEMDblzoYp.ZB2'),
 (36, 'Sam1', 'sam1@gmail.com', '$2y$11$dwEEypwYinaL8oc0W7sTn.L4m.ITDOITuwKd60gae2ZvUN905G1sC'),
-(38, 'TestUser', 'test@gmail.com', '$2y$11$pMSrhYNOQWDkfzediskDdew.GWF4cBEJ5omCUyaBckQhiNkVWAVzO');
+(38, 'TestUser', 'test@gmail.com', '$2y$11$pMSrhYNOQWDkfzediskDdew.GWF4cBEJ5omCUyaBckQhiNkVWAVzO'),
+(39, 'NewUser', 'newuseremail@gmail.com', '$2y$11$y/1jxiemiYNnz8Y1SI2ZTO7oi7urVlrmRVMIS.j4JZc7wLOuzDqKa');
 
 --
 -- Indexes for dumped tables
@@ -238,37 +253,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `commentlikes`
 --
 ALTER TABLE `commentlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `postlikes`
 --
 ALTER TABLE `postlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `subreddits`
 --
 ALTER TABLE `subreddits`
-  MODIFY `subredditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `subredditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables
